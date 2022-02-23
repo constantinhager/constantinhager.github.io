@@ -1,23 +1,51 @@
 {
-    "label": "Jekyll: Build Dev",
-    "detail": "bundle install",
-    "type": "shell",
-    "linux": {
-        "command": "bundle install"
-    },
-    "group": {
-        "kind": "build",
-        "isDefault": true
-    },
-    "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-    },
-    "problemMatcher": [
-        "$eslint-stylish"
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Jekyll: Build",
+            "detail": "Jekyll: Build",
+            "type": "shell",
+            "linux": {
+                "command": "bundle install"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$eslint-stylish"
+            ]
+        },
+        {
+            "label": "Jekyll: Show Web Server",
+            "detail": "Jekyll: Show Web Server",
+            "type": "shell",
+            "linux": {
+                "command": "bundle exec jekyll s"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$eslint-stylish"
+            ]
+        }
     ]
 }
