@@ -7,7 +7,7 @@ tags: [PowerShell, Windows Update]
 
 Today I had the challenge to find information for a specific Windows Update.
 
-I only know the KB number of that particular Windows Update but I want to get the following information:
+I only know the KB number of that particular Windows Update but I wanted to get the following information:
 
 - Name of the Windows Update
 - The update information URL from Microsoft
