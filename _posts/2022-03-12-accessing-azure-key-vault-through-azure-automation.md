@@ -29,8 +29,8 @@ So let's start by creating the needed Azure resources with PowerShell.
 ```powershell
 # Resource Group
 $splat = @{
-    Name     = "image-rg"
-    Location = "North Europe"
+    Name     = "blog-rg"
+    Location = "West Europe"
 }
 $rg = New-AzResourceGroup @splat
 
