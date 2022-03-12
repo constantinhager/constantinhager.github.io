@@ -29,7 +29,7 @@
             "detail": "Jekyll: Show Web Server",
             "type": "shell",
             "linux": {
-                "command": "bundle exec jekyll s"
+                "command": "bundle exec jekyll s --force-polling --livereload"
             },
             "group": {
                 "kind": "build",
