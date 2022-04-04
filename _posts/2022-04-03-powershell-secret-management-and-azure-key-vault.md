@@ -109,13 +109,13 @@ $directoryId = $sp.AppOwnerOrganizationId
 $pass = ConvertTo-SecureString -String $key -AsPlainText -Force
 
 $splat = @{
-    TypeName     = System.Management.Automation.PSCredential
+    TypeName     = "System.Management.Automation.PSCredential"
     ArgumentList = "$appid" , $pass
 }
 
 $cred = New-Object @splat
 
-Connect-AzAccount -Credential $cred -ServicePrincipal -TenantId $Directoryid
+Login-AzAccount -Credential $cred -ServicePrincipal -TenantId $Directoryid
 
 ```
 
