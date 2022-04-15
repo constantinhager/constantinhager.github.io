@@ -7,14 +7,8 @@ order: 4
 <div class='impressum'><p>Information provided according to Sec. 5 German Telemedia Act (TMG)</p><p>Constantin Hager <br>
 Sebastiansplatz 3<br>
 84524 Neuötting <br>
-</p><p> <strong>Represented by: </strong><br>
-Constantin Hager<br>
 </p><p><strong>Contact:</strong> <br>
-Telefon: +49-1712720234<br>
-E-Mail: <a href='mailto:constantin.hager@outlook.de'>constantin.hager@outlook.de</a></p><p><strong>Person responsible for content in accordance with 55 Abs. 2 RStV:</strong><br>
-Constantin Hager <br>
-Sebastiansplatz 3<br>
-84524 Neuötting <br></p> <p><strong>Disclaimer: </strong><br><br>
+E-Mail: constantin.hager [at] outlook.de<br></p> <p><strong>Disclaimer: </strong><br><br>
 <strong>Liability for linked content</strong><br><br>
 Our content contains links to external third-party websites, the content of which is not under our control. We therefore accept no liability for any external content. Responsibility for the content of pages linked to remains with the provider or operator of the linked pages. Pages linked to were checked for possible legal infringements at the time of linking to them.
 
