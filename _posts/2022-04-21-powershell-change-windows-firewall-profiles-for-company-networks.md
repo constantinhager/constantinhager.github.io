@@ -13,9 +13,9 @@ A quick reminder on what firewall profile are on every Windows system (Taken fro
 
 | Profile Name  | Description |
 | -----------   | ----------- |
-| Public        | the default profile is the public profile, which is used to designate public networks such as Wi-Fi hotspots at coffee shops, airports, and other locations. |
-| Private       | The private profile is a user-assigned profile and is used to designate private or home networks. |
-| Domain        | The domain profile applies to networks where the host system can authenticate to a domain controller. |
+| Public        | The default profile is the public profile, <br> which is used to designate public networks such as <br> Wi-Fi hotspots at coffee shops, airports, and other locations. |
+| Private       | The private profile is a user-assigned profile <br> and is used to designate private or home networks. |
+| Domain        | The domain profile applies to networks where <br> the host system can authenticate to a domain controller. |
 
 ## The problem with the Public profile
 So every network I connect to for the first time has the Windows Firewall profile type of Public. In the modern workplace world
