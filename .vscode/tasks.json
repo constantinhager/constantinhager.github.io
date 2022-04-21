@@ -46,6 +46,28 @@
             "problemMatcher": [
                 "$eslint-stylish"
             ]
+        },
+        {
+            "label": "Jekyll: Create New Post",
+            "detail": "Jekyll: Create New Post",
+            "type": "shell",
+            "command": "bundle",
+            "args": [
+                "exec",
+                "jekyll",
+                "compose",
+                "${input:PostName}"
+            ],
+            "problemMatcher": [
+                "$eslint-stylish"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "PostName",
+            "description": "Enter the name of the post"
         }
     ]
 }
