@@ -15,12 +15,16 @@
 	},
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"workbench.colorTheme": "SynthWave '84"
+		"workbench.colorTheme": "SynthWave '84",
+		"cSpell.words": [
+			"hotspots"
+		]
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"rebornix.Ruby",
-		"robbowen.synthwave-vscode"
+		"robbowen.synthwave-vscode",
+		"streetsidesoftware.code-spell-checker"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
