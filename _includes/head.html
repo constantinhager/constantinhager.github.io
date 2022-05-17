@@ -94,6 +94,10 @@
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 
+    <!--Cookie Consent-->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
     {% if site.toc and page.toc %}
     <link rel="stylesheet" href="{{ site.data.assets[origin].bootstrap-toc.css }}">
     {% endif %}
@@ -106,10 +110,6 @@
     <!-- JavaScript -->
 
     <script src="{{ site.data.assets[origin].jquery.js }}"></script>
-
-    <!--Cookie Consent-->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
 
     {% unless site.theme_mode %}
     {% include mode-toggle.html %}
