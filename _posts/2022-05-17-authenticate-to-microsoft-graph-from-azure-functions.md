@@ -58,12 +58,12 @@ Connect-MgGraph -AccessToken $accessToken
 Now authenticated to Microsoft Graph you cannot do anything because the System Assigned managed identity has no
 rights inside of Microsoft Graph.
 
-To assign them I have found a good blog article of an MVP called Luise Freese. You can find the complete article [here](https://regarding365.com/putting-some-more-fun-into-azure-functions-managed-identity-microsoft-graph-f9a51319f4e5)
+To assign them I have found a good blog article of an MVP called Luise Freese. You can find the complete article [here](https://regarding365.com/putting-some-more-fun-into-azure-functions-managed-identity-microsoft-graph-f9a51319f4e5){:target="_blank"}
 
 You essentially will need the following Az CLI commands for doing a Microsoft Graph delegated permission
 (Sample with the Group.Read.All permission):
 
-If you do not know the Microsoft Graph permissions you can find the complete permission reference [here](https://docs.microsoft.com/en-us/graph/permissions-reference)
+If you do not know the Microsoft Graph permissions you can find the complete permission reference [here](https://docs.microsoft.com/en-us/graph/permissions-reference){:target="_blank"}
 
 ```bash
 #Save that service provider
