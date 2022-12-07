@@ -60,7 +60,7 @@ function New-ADDGuidMap
     return $guidmap
 }
 
-function New-ADDExtendedRightsMap
+function New-ADDExtendedRightMap
 {
     .SYNOPSIS
         Creates a extended rights map for the delegation part
@@ -85,6 +85,14 @@ function New-ADDExtendedRightsMap
 ```
 
 Now that we have all normal rights like "user" or "group" we now have exteded rights like "reset password" also.
+
+To use these Associative arrays we need to call the functions and store the return values
+in variables. We use them throughout the blog.
+
+```powershell
+$GuidMap = New-ADDGuidMap
+$ExtendedRight = New-ADDExtendedRightMap
+```
 
 The next step is that we need the SID of the target AD object.
 
