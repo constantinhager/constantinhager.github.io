@@ -1,117 +1,97 @@
-<!--
-  The Head
--->
+<!-- The Head -->
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
 
-    <!-- Allow having a localized datetime different from the appearance language -->
-    {% if site.prefer_datetime_locale %}
-    <meta name="prefer-datetime-locale" content="{{ site.prefer_datetime_locale }}">
-    {% endif %}
+  {% capture seo_tags %}
+  {% seo title=false %}
+  {% endcapture %}
 
-    {% if page.layout == 'home' or page.layout == 'post' %}
+  {% if page.image %}
+  {% assign img = page.image.path | default: page.image %}
 
-    {% if site.google_analytics.pv.proxy_endpoint %}
-    <meta name="pv-proxy-endpoint" content="{{ site.google_analytics.pv.proxy_endpoint }}">
-    {% endif %}
+  {% unless img contains '://' %}
+  {% assign img_path = page.img_path | append: '/' | append: img | replace: '//', '/' %}
+  {% capture target %}"{{ img | absolute_url }}"{% endcapture %}
 
-    {% if site.google_analytics.pv.cache_path %}
-    <meta name="pv-cache-path" content="{{ site.google_analytics.pv.cache_path | relative_url }}">
-    {% endif %}
+  {% if site.img_cdn contains '//' %}
+  <!-- it's a cross-origin URL -->
+  {% capture replacement %}"{{ site.img_cdn }}{{ img_path }}"{% endcapture %}
+  {% else %}
+  <!-- it's a local file path -->
+  {%- capture replacement -%}
+  "{{ site.img_cdn | append: '/' | append: img_path | replace: '//', '/' | absolute_url }}"
+  {%- endcapture -%}
+  {% endif %}
 
-    {% endif %}
-
-    {% capture seo_tags %}
-    {% seo title=false %}
-    {% endcapture %}
-
-    {% if site.img_cdn and seo_tags contains 'og:image' %}
-    {% assign properties = 'og:image,twitter:image' | split: ',' %}
-
-    {% for prop in properties %}
-    {% if site.img_cdn contains '//' %}
-    <!-- `site.img_cdn` is a cross-origin URL -->
-    {% capture target %}
-    <meta property="{{ prop }}" content="{{ site.url }}{% endcapture %}
-        {% capture replacement %}<meta property=" {{ prop }}" content="{{ site.img_cdn }}{% endcapture %}
-      {% else %}
-        <!-- `site.img_cdn` is a local file path -->
-        {% capture target %}<meta property=" {{ prop }}" content="{{ site.url }}{{ site.baseurl }}{% endcapture %}
-        {% assign replacement = target | append: site.img_cdn %}
-      {% endif %}
-
-      {% assign seo_tags = seo_tags | replace: target, replacement %}
-
-    {% endfor %}
+  {% assign seo_tags = seo_tags | replace: target, replacement %}
+  {% endunless %}
   {% endif %}
 
   {{ seo_tags }}
 
   <title>
-  {%- unless page.layout == " home" -%} {{ page.title | append: " | " }} {%- endunless -%} {{ site.title }} </title>
+    {%- unless page.layout == 'home' -%}
+    {{ page.title | append: ' | ' }}
+    {%- endunless -%}
+    {{ site.title }}
+  </title>
 
-    {% include favicons.html %}
+  {% include_cached favicons.html %}
 
-    {% if site.resources.ignore_env != jekyll.environment and site.resources.self_hosted %}
+  {% if site.resources.ignore_env != jekyll.environment and site.resources.self_hosted %}
+  <link href="{{ site.data.origin[type].webfonts | relative_url }}" rel="stylesheet">
 
-    <link href="{{ site.data.assets[origin].webfonts | relative_url }}" rel="stylesheet">
+  {% else %}
+  {% for cdn in site.data.origin[type].cdns %}
+  <link rel="preconnect" href="{{ cdn.url }}" {{ cdn.args }}>
+  <link rel="dns-prefetch" href="{{ cdn.url }}" {{ cdn.args }}>
+  {% endfor %}
 
-    {% else %}
+  <link rel="stylesheet" href="{{ site.data.origin[type].webfonts | relative_url }}">
+  {% endif %}
 
-    {% for cdn in site.data.assets[origin].cdns %}
-    <link rel="preconnect" href="{{ cdn.url }}" {{ cdn.args }}>
-    <link rel="dns-prefetch" href="{{ cdn.url }}" {{ cdn.args }}>
-    {% endfor %}
+  <!-- GA -->
+  {% if jekyll.environment == 'production' and site.google_analytics.id != empty and site.google_analytics.id %}
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
-    <link rel="stylesheet" href="{{ site.data.assets[origin].webfonts }}">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  {% endif %}
 
-    {% endif %}
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{{ site.data.origin[type].bootstrap.css | relative_url}}">
 
-    <!-- GA -->
-    {% if jekyll.environment == 'production'
-    and site.google_analytics.id != empty and site.google_analytics.id %}
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ site.data.origin[type].fontawesome.css | relative_url }}">
 
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="stylesheet" href="{{ '/assets/css/:THEME.css' | replace: ':THEME', site.theme | relative_url }}">
 
-    {% if site.google_analytics.pv.proxy_endpoint %}
-    {% assign proxy_url = site.google_analytics.pv.proxy_endpoint
-    | replace: "https://", "" | split: "/" | first | prepend: "https://" %}
-    <link rel="preconnect" href="{{ proxy_url }}" crossorigin="use-credentials">
-    <link rel="dns-prefetch" href="{{ proxy_url }}">
-    {% endif %}
-    {% endif %}
+  {% if site.toc and page.toc %}
+  <link rel="stylesheet" href="{{ site.data.origin[type].toc.css | relative_url }}">
+  {% endif %}
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ site.data.assets[origin].bootstrap.css }}">
+  {% if page.layout == 'post' or page.layout == 'page' or page.layout == 'home' %}
+  <link rel="stylesheet" href="{{ site.data.origin[type]['lazy-polyfill'].css | relative_url }}">
+  {% endif %}
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ site.data.assets[origin].fontawesome.css }}">
+  {% if page.layout == 'page' or page.layout == 'post' %}
+  <!-- Manific Popup -->
+  <link rel="stylesheet" href="{{ site.data.origin[type].magnific-popup.css | relative_url }}">
+  {% endif %}
 
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <!-- JavaScript -->
 
-    <!--Cookie Consent-->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+  {% unless site.theme_mode %}
+  {% include mode-toggle.html %}
+  {% endunless %}
 
-    {% if site.toc and page.toc %}
-    <link rel="stylesheet" href="{{ site.data.assets[origin].bootstrap-toc.css }}">
-    {% endif %}
-
-    {% if page.layout == 'page' or page.layout == 'post' %}
-    <!-- Manific Popup -->
-    <link rel="stylesheet" href="{{ site.data.assets[origin].magnific-popup.css }}">
-    {% endif %}
-
-    <!-- JavaScript -->
-
-    <script src="{{ site.data.assets[origin].jquery.js }}"></script>
-
-    {% unless site.theme_mode %}
-    {% include mode-toggle.html %}
-    {% endunless %}
+  {% include metadata-hook.html %}
 </head>

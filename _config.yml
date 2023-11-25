@@ -3,17 +3,10 @@
 # Import the theme
 theme: jekyll-theme-chirpy
 
-# Change the following value to '/PROJECT_NAME' ONLY IF your site type is GitHub Pages Project sites
-# and doesn't have a custom domain.
-baseurl: ''
-
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
 # otherwise, the layout language will use the default value of 'en'.
 lang: en
-
-# Additional parameters for datetime localization, optional. › https://github.com/iamkun/dayjs/tree/dev/src/locale
-prefer_datetime_locale:
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Europe/Berlin
@@ -28,7 +21,8 @@ tagline: All Infos Around IT   # it will display as the sub-title
 description: >-                        # used by seo meta and the atom feed
   All Infos Around IT
 
-# fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
+# Fill in the protocol & hostname for your site.
+# e.g. 'https://username.github.io', note that it does not end with a '/'.
 url: 'https://constantinhager.github.io'
 
 github:
@@ -47,6 +41,7 @@ social:
     - https://twitter.com/chagerCOC      # change to your twitter homepage
     - https://github.com/constantinhager       # change to your github homepage
     # Uncomment below to add more social links
+    # - https://www.facebook.com/username
     - https://www.linkedin.com/in/constantin-hager-456ba615a
 
 google_site_verification:               # fill in to your verification string
@@ -56,10 +51,6 @@ google_site_verification:               # fill in to your verification string
 
 google_analytics:
   id: 'G-7W2XS5L5CW'  # fill in your Google Analytics ID
-  # Google Analytics pageviews report settings
-  pv:
-    proxy_endpoint:   # fill in the Google Analytics superProxy endpoint of Google App Engine
-    cache_path:       # the local PV cache data, friendly to visitors from GFW region
 
 # Prefer color scheme setting.
 #
@@ -105,6 +96,7 @@ comments:
     mapping:          # optional, default to 'pathname'
     input_position:   # optional, default to 'bottom'
     lang:             # optional, default to the value of `site.lang`
+    reactions_enabled: # optional, default to the value of `1`
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:
@@ -114,7 +106,13 @@ assets:
     # only works if `assets.self_host.enabled` is 'true'
     env:          # [development|production]
 
+pwa:
+  enabled: true # the option for PWA feature
+
 paginate: 10
+
+# The base URL of your site
+baseurl: ""
 
 # ------------ The following options are not recommended to be modified ------------------
 
@@ -179,11 +177,11 @@ compress_html:
 exclude:
   - '*.gem'
   - '*.gemspec'
+  - docs
   - tools
   - README.md
   - LICENSE
-  - gulpfile.js
-  - node_modules
+  - rollup.config.js
   - package*.json
 
 jekyll-archives:

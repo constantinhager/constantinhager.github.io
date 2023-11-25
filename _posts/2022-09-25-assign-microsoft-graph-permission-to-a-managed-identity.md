@@ -20,7 +20,7 @@ But First Let us create a Resource Group and a User Assigned Managed Identity wi
 
 ```powershell
 New-AzResourceGroup -Name Blog -Location 'West Europe'
-$Identity = New-AzUserAssignedIdentity -ResourceGroupName 'Blog' -Name 'blogidentity'
+$Identity = New-AzUserAssignedIdentity -ResourceGroupName 'Blog' -Name 'blogidentity' -Location 'West Europe'
 ```
 
 After that we create some variables
@@ -111,10 +111,8 @@ function Add-CHManagedIdentityRoleAssignment {
         Where-Object { $_.Value -eq $Permission -and $_.AllowedMemberTypes -contains 'Application' }
 
         if ($null -eq $AppRole) {
-            Write-Output "No Approle found in Microsoft Graph with Permission name $Permission"
-            Continue
+            Write-Output "No Approle found in Microsoft Graph with Permission name $Permission. Trying OAuth Permission scopes."
         } else {
-
             $IsAppRoleAssigned = Get-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $ServicePrincipalId |
             Where-Object { $_.AppRoleId -eq $AppRole.Id }
 
@@ -125,8 +123,30 @@ function Add-CHManagedIdentityRoleAssignment {
                     'resourceId'  = $GraphServicePrincipal.Id
                     'appRoleId'   = $AppRole.Id
                 }
-
                 New-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $MSI.Id -BodyParameter $appRoleAssignment
+            } else {
+                Write-Output "$Permission on $($MSI.DisplayName) exists already."
+                Continue
+            }
+        }
+
+        $OAuthPermission = $GraphServicePrincipal.Oauth2PermissionScopes | Where-Object { $_.Value -eq $Permission }
+        if ($null -eq $OAuthPermission) {
+            Write-Output "No OAuth Permission found in Microsoft Graph with Permission name $Permission."
+            Continue
+        } else {
+            $IsAppRoleAssigned = Get-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $ServicePrincipalId |
+            Where-Object { $_.AppRoleId -eq $OAuthPermission.Id }
+
+            if ($null -eq $IsAppRoleAssigned) {
+                Write-Output "Assign $Permission to $($MSI.DisplayName)."
+                $permissiongrant = @{
+                    'clientId'    = $MSI.Id
+                    'consentType' = 'AllPrincipals'
+                    'resourceId'  = $GraphServicePrincipal.Id
+                    'scope'       = $OAuthPermission.Value
+                }
+                New-MgOauth2PermissionGrant -BodyParameter $permissiongrant
             } else {
                 Write-Output "$Permission on $($MSI.DisplayName) exists already."
                 Continue
