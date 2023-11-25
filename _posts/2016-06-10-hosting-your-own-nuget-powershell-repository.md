@@ -28,7 +28,7 @@ First Install IIS with the following PowerShell command:
 Install-WindowsFeature NET-Framework-Core,NET-Framework-45-ASPNET,Web-Default-Doc,Web-Static-Content,Web-Http-Logging,Web-Stat-Compression,Web-Filtering,Web-Net-Ext45,Web-Asp-Net45,Web-ISAPI-Ext,Web-ISAPI-Filter,Web-Mgmt-Console,Net-Framework-Core -Source D:\sources\sxs
 ```
 
-After that install the IIS Rewrite Tool from the following site: [Download IIS Rewrite Tool](http://go.microsoft.com/?linkid=9722532)
+After that install the IIS Rewrite Tool from the following site: [Download IIS Rewrite Tool](https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi)
 
 Before we Build the NuGet Server you have to install the Windows Azure SDK. You can get it via the [Microsoft Web Plattform Installer](https://www.microsoft.com/web/downloads/platform.aspx). Install It and search for Windows Azure SDK. In my case i have to install the SDK for Visual Studio 2015.
 

@@ -27,7 +27,7 @@ Most browsers allow you to refuse to accept cookies and to delete cookies. The m
 <br>
 <ul>
 <li><a href='https://support.google.com/chrome/answer/95647?hl=en'> Chrome</a></li>
-<li><a href='http://www.opera.com/help/tutorials/security/cookies/'>Opera</a></li>
+<li><a href='https://help.opera.com/en/latest/web-preferences/'>Opera</a></li>
 <li><a href='https://support.microsoft.com/en-gb/help/17442/windows-internet-explorer-delete-manage-cookies'>Internet Explorer </a></li>
 <li><a href='https://support.apple.com/kb/PH21411'>Safari</a></li> and
 <li><a href='https://privacy.microsoft.com/en-us/windows-10-microsoft-edge-and-privacy'>Edge</a></li>
