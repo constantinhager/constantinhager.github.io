@@ -27,7 +27,8 @@
                 "streetsidesoftware.code-spell-checker",
                 "shopify.ruby-lsp",
                 "dedsec727.jekyll-run",
-                "sissel.shopify-liquid"
+                "sissel.shopify-liquid",
+                "eamodio.gitlens"
             ]
         }
     },
