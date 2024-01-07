@@ -95,7 +95,8 @@ The virtual machine's storage utilizes a 1 TB Standard HDD Managed disk.
 | Load Balancer      | External        | 4.55 € | 1TB traffic per month included.                                  |
 | Virtual Machine    | Standard_D4s_v4 |27.55 € | A Spot VM is used. The normal price would is 275.22 €            |
 | Standard HDD       | 1 TB            |37.30 € |                                                                  |
-|--------------------| ----------------|------- | ---------------------------------------------------------------- |
+|--------------------| ----------------|------- | ---------------------------------
+------------------------------- |
 | Price per Month    |                 |72.72 € |                                                                  |
 
 Part 1 wraps up at this point. Moving on to Part 2, we set up GitHub to facilitate the deployment of our infrastructure on Microsoft Azure.
