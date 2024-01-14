@@ -131,6 +131,6 @@ Select "Review + assign"
 
 Result:
 
-![Assign Permissions 5](../assets/pictures/2024-01-07/2024-01-14_09-07-32.png)
+![Assign Permissions 5](../assets/pictures/2024-01-07/2024-01-14_09-07-08.png)
 
 That's it for part 2 in part 3 we create the GitHub workflows for the terraform deployment.
