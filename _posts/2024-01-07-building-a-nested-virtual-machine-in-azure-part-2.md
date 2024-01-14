@@ -41,6 +41,9 @@ Navigate to Settings -> Secrets an variables -> Actions and create the following
 - AZURE_SUBSCRIPTION_ID: In the Azure Portal search for the "Subscription" Service and find the subscription id
 next to the "Subscription name"
 - AZURE_TENANT_ID: See Directory (tenant) ID
+- STORAGE_ACCOUNT: The name of the Terraform Storage Account
+- CONTAINER_NAME: The name of the Terraform Storage Account Container
+- RESOURCE_GROUP_NAME: The resource group of the Terraform Storage Account
 
 ![Create Repository secret 1](../assets/pictures/2024-01-07/2024-01-07_08-46-53.png)
 ![Create Repository secret 2](../assets/pictures/2024-01-07/2024-01-07_08-48-26.png)
@@ -99,5 +102,35 @@ End result
 If you prefer to watch a YouTube video demonstrating the setup and additional steps, you can do so.
 
 <iframe width="800" height="600" src="https://www.youtube.com/embed/10ljwwJ3V30" title="Using OIDC with GitHub Actions and Terraform" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+## Assign Permissions
+
+The previously generated service principal requires permissions for deploying Azure resources.
+I will assign Contributor permissions at the Azure Subscription level.
+
+Within the Azure Portal, go to the "Subscription" service, choose your subscription, and click on "Access control (IAM)".
+
+Select "Add" -> "Add role assignment"
+
+![Assign Permissions 1](../assets/pictures/2024-01-07/2024-01-14_08-56-19.png)
+
+Select "Privileged administrator roles" and select "Contributor". Click "Next".
+
+![Assign Permissions 2](../assets/pictures/2024-01-07/2024-01-14_08-58-23.png)
+
+Choose "Select members," search for the name of the previously generated service principal, and select it.
+Click on "Select".
+
+![Assign Permissions 3](../assets/pictures/2024-01-07/2024-01-14_09-02-31.png)
+
+Select "Review + assign"
+
+![Assign Permissions 4](../assets/pictures/2024-01-07/2024-01-14_09-05-45.png)
+
+Select "Review + assign"
+
+Result:
+
+![Assign Permissions 5](../assets/pictures/2024-01-07/2024-01-14_09-07-32.png)
 
 That's it for part 2 in part 3 we create the GitHub workflows for the terraform deployment.

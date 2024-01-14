@@ -1,9 +1,13 @@
 {
     "cSpell.words": [
+        "blockquote",
+        "deploytfstorageaccount",
         "Entra",
         "Freese",
         "hotspots",
         "Loadbalancer",
-        "Luise"
+        "Luise",
+        "OIDC",
+        "pullrequest"
     ]
 }
