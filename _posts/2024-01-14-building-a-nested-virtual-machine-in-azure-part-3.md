@@ -265,4 +265,6 @@ Select "CreateTFStorageAccount", select "Run workflow" and select "Run workflow"
 
 ![CreateTFStorageAccount 3](../assets/pictures/2024-01-14/2024-01-14_09-18-47.png)
 
-That concludes part 3. In the next blog post, we will use Terraform to create the Azure resources.
+
+Part 3 wraps up here. In the upcoming blog post, we'll delve into an exploration of Terraform and
+delve into the mechanics of the Pull Request model.
