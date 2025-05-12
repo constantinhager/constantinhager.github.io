@@ -5,7 +5,7 @@ order: 4
 ---
 
 <div class='impressum'><p>Information provided according to Sec. 5 German Telemedia Act (TMG)</p><p>Constantin Hager <br>
-Sebastiansplatz 3<br>
+Feldstraße 12a<br>
 84524 Neuötting <br>
 </p><p><strong>Contact:</strong> <br>
 E-Mail: constantin.hager [at] outlook.de<br></p> <p><strong>Disclaimer: </strong><br><br>
