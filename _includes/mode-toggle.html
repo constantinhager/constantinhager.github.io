@@ -1,0 +1,35 @@
+    constructor() {
+      // if (this.hasMode) {
+      //   if (this.isDarkMode) {
+      //     if (!this.isSysDarkPrefer) {
+      //       this.setDark();
+      //     }
+      //   } else {
+      //     if (this.isSysDarkPrefer) {
+      //       this.setLight();
+      //     }
+      //   }
+      // }
+      this.setDark();
+
+      let self = this;
+
+      /* always follow the system prefers */
+      this.sysDarkPrefers.addEventListener('change', () => {
+        if (self.hasMode) {
+          if (self.isDarkMode) {
+            if (!self.isSysDarkPrefer) {
+              self.setDark();
+            }
+          } else {
+            if (self.isSysDarkPrefer) {
+              self.setLight();
+            }
+          }
+
+          self.clearMode();
+        }
+
+        self.notify();
+      });
+    } /* constructor() */

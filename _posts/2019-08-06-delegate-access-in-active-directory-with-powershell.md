@@ -62,6 +62,7 @@ function New-ADDGuidMap
 
 function New-ADDExtendedRightMap
 {
+    <#
     .SYNOPSIS
         Creates a extended rights map for the delegation part
     .DESCRIPTION
