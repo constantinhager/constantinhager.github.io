@@ -61,7 +61,18 @@
             "problemMatcher": [
                 "$eslint-stylish"
             ]
-        }
+        },
+        {
+            "label": "Run Jekyll Server",
+            "type": "shell",
+            "command": "./tools/run.sh",
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Runs the Jekyll server with live reload."
+        },
     ],
     "inputs": [
         {
