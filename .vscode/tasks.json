@@ -1,84 +1,26 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Jekyll: Build",
-            "detail": "Jekyll: Build",
-            "type": "shell",
-            "linux": {
-                "command": "bundle install"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "problemMatcher": [
-                "$eslint-stylish"
-            ]
-        },
-        {
-            "label": "Jekyll: Show Web Server",
-            "detail": "Jekyll: Show Web Server",
-            "type": "shell",
-            "linux": {
-                "command": "bundle exec jekyll s --force-polling --livereload"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "problemMatcher": [
-                "$eslint-stylish"
-            ]
-        },
-        {
-            "label": "Jekyll: Create New Post",
-            "detail": "Jekyll: Create New Post",
-            "type": "shell",
-            "command": "bundle",
-            "args": [
-                "exec",
-                "jekyll",
-                "compose",
-                "${input:PostName}"
-            ],
-            "problemMatcher": [
-                "$eslint-stylish"
-            ]
-        },
-        {
-            "label": "Run Jekyll Server",
-            "type": "shell",
-            "command": "./tools/run.sh",
-            "group": {
-              "kind": "build",
-              "isDefault": true
-            },
-            "problemMatcher": [],
-            "detail": "Runs the Jekyll server with live reload."
-        },
-    ],
-    "inputs": [
-        {
-            "type": "promptString",
-            "id": "PostName",
-            "description": "Enter the name of the post"
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Jekyll Server",
+      "type": "shell",
+      "command": "./tools/run.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Runs the Jekyll server with live reload."
+    },
+    {
+      "label": "Build Jekyll Site",
+      "type": "shell",
+      "command": "./tools/test.sh",
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": [],
+      "detail": "Build the Jekyll site for production."
+    }
+  ]
 }
