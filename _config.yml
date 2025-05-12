@@ -40,6 +40,8 @@ social:
     # The first element serves as the copyright owner's link
     - https://twitter.com/chagerCOC # change to your Twitter homepage
     - https://github.com/constantinhager # change to your GitHub homepage
+    - https://www.linkedin.com/in/constantin-hager/ # change to your LinkedIn homepage
+    - https://bsky.app/profile/chagercoc.bsky.social # change to your Bluesky homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
