@@ -133,4 +133,6 @@ Result:
 
 ![Assign Permissions 5](../assets/pictures/2024-01-07/2024-01-14_09-07-08.png)
 
+Navigate to the nestedvm-rg resource group and assign the "Storage Blob Data Contributor" role to the service principal for the Terraform Storage Account.
+
 That's it for part 2 in part 3 we create the GitHub workflows for the terraform deployment.
