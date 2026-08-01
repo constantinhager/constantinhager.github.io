@@ -36,6 +36,7 @@ social:
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Constantin Hager
   email: constantin.hager@outlook.de # change to your email address
+  fediverse_handle: # fill in your fediverse handle. E.g. "@username@domain.com"
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/chagerCOC # change to your Twitter homepage
@@ -108,6 +109,16 @@ social_preview_image: # string, local or CORS resources
 
 # boolean type, the global switch for TOC in posts.
 toc: true
+
+actions:
+  # Display "Edit this post" action on each post page to encourage contributions.
+  edit_post:
+    enabled: false # set to true to display the "Edit this post" action.
+    url: "" # repository base URL, e.g. https://github.com/cotes2020/jekyll-theme-chirpy/edit/master
+    # Use dynamic or static URL for the edit link.
+    # If `static_url` is false, the post's path will be appended to the `url` above as the final edit link.
+    # Set to true if the URL should remain unchanged, which means each post will share the same edit link.
+    static_url: false # [ true | false ]
 
 comments:
   # Global switch for the post-comment system. Keeping it empty means disabled.
@@ -182,7 +193,7 @@ defaults:
       toc: true # Display TOC column in posts.
       # DO NOT modify the following parameter unless you are confident enough
       # to update the code of all other post links in this project.
-      permalink: /:title/
+      permalink: /posts/:title/
   - scope:
       path: _drafts
     values:
@@ -214,7 +225,6 @@ exclude:
   - README.md
   - LICENSE
   - purgecss.js
-  - rollup.config.js
   - "package*.json"
 
 jekyll-archives:
