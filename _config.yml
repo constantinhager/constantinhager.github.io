@@ -205,6 +205,9 @@ defaults:
       layout: page
       permalink: /:title/
 
+plugins:
+  - jekyll-redirect-from
+
 sass:
   style: compressed
 
