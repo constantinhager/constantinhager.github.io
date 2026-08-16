@@ -37,13 +37,13 @@ setup script adds a single entry for that.
 
 The repository organizes customizations into five folders, each mapping to a distinct Copilot Chat feature:
 
-|Folder|File Type|Purpose|
-|---|---|---|
-|Agents|`*.agent.md`|Custom AI personas with their own tools and instructions|
-|Instructions|`*.instructions.md`|Coding standards that auto-apply via a glob or get attached manually|
-|Skills|`<name>/SKILL.md`|On-demand capabilities exposed as slash commands|
-|Prompts|`*.prompt.md`|Reusable templates for repeatable tasks|
-|Hooks|JSON config + scripts|Guardrails enforced at fixed points in the agent loop|
+| Folder       | File Type             | Purpose                                                              |
+| ------------ | --------------------- | -------------------------------------------------------------------- |
+| Agents       | `*.agent.md`          | Custom AI personas with their own tools and instructions             |
+| Instructions | `*.instructions.md`   | Coding standards that auto-apply via a glob or get attached manually |
+| Skills       | `<name>/SKILL.md`     | On-demand capabilities exposed as slash commands                     |
+| Prompts      | `*.prompt.md`         | Reusable templates for repeatable tasks                              |
+| Hooks        | JSON config + scripts | Guardrails enforced at fixed points in the agent loop                |
 
 The Skills library alone is extensive — dozens of skills covering PowerShell/DSC workflows
 (Pester patterns, Sampler builds, DSC troubleshooting), Windows infrastructure
@@ -100,4 +100,6 @@ syncing, and shipping as a proper module with update tooling, rather than a fold
 and forget to keep current. If you're maintaining a non-trivial set of custom agents, instructions, or skills for
 GitHub Copilot and work across more than one machine, CopilotAtelier is worth a look.
 
-If you want to watch the latest UserGroup meeting where Raimund Andrée demos CopilotAtelier and more, check out the recording on YouTube: [The Agentic Operating Model: From Ad Hoc Agent Use to Versioned, Verifiable Work](https://www.youtube.com/watch?v=o4KqeqtryfI).
+If you want to watch the latest UserGroup meeting where Raimund Andrée demos CopilotAtelier and more, check out the recording on YouTube:
+
+[![The Agentic Operating Model: From Ad Hoc Agent Use to Versioned, Verifiable Work](https://img.youtube.com/vi/o4KqeqtryfI/hqdefault.jpg){: width="640" }](https://www.youtube.com/watch?v=o4KqeqtryfI){:target="_blank" rel="noopener noreferrer"}
