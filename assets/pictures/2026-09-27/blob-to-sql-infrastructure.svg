@@ -1,0 +1,293 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1720" height="1090" viewBox="0 0 1720 1090"
+    role="img" aria-labelledby="title desc">
+    <title id="title">Blob-to-SQL Infrastructure Diagram</title>
+    <desc id="desc">Architecture diagram for the Blob-to-SQL project: GitHub Actions deploys with
+        OIDC into an Azure resource group; a CSV upload to the data storage account raises a
+        BlobCreated event, Event Grid calls the Import-CsvBlob function on Flex Consumption, the
+        function upserts rows into Azure SQL and moves the file to the processed container, or to
+        the failed container with an error report. Icons: Microsoft Azure Architecture Icons (V23).</desc>
+    <!-- Service icons: Microsoft Azure Public Service Icons V23, https://learn.microsoft.com/azure/architecture/icons/ -->
+    <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f6efe3" />
+            <stop offset="55%" stop-color="#f4f7fb" />
+            <stop offset="100%" stop-color="#e5f0f6" />
+        </linearGradient>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#244a5a" flood-opacity="0.10" />
+        </filter>
+        <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#244a5a" flood-opacity="0.08" />
+        </filter>
+        <marker id="arrowBlue" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+            <path d="M0,1 L11,6 L0,11 Z" fill="#1f7a8c" />
+        </marker>
+        <marker id="arrowOrange" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+            <path d="M0,1 L11,6 L0,11 Z" fill="#c96a28" />
+        </marker>
+        <marker id="arrowGray" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+            <path d="M0,1 L11,6 L0,11 Z" fill="#51606b" />
+        </marker>
+        <marker id="arrowPurple" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+            <path d="M0,1 L11,6 L0,11 Z" fill="#6b5bb5" />
+        </marker>
+        <style>
+      text {
+        font-family: "Segoe UI", "Aptos", Arial, sans-serif;
+        fill: #16313d;
+      }
+      .title { font-size: 34px; font-weight: 700; letter-spacing: 0.3px; }
+      .subtitle { font-size: 16px; fill: #4d6570; }
+      .section { font-size: 19px; font-weight: 700; }
+      .label { font-size: 16px; font-weight: 700; }
+      .kind { font-size: 12px; fill: #60727b; }
+      .body { font-size: 13px; fill: #3f525c; }
+      .tiny { font-size: 12px; fill: #60727b; }
+      .strong { font-weight: 700; fill: #16313d; }
+      .halo { paint-order: stroke; stroke: #f4f7fb; stroke-width: 5px; stroke-linejoin: round; }
+      .halo-white { paint-order: stroke; stroke: #ffffff; stroke-width: 5px; stroke-linejoin: round; }
+      .badge-text { font-size: 13px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .card { fill: #ffffff; stroke-width: 1.5; filter: url(#cardShadow); }
+      .repo { stroke: #dfc6a8; }
+      .deploy { stroke: #efc28b; }
+      .identity { stroke: #c7bce8; }
+      .storage { stroke: #9fc4da; }
+      .compute { stroke: #9dcfaf; }
+      .events { stroke: #b6c4e8; }
+      .data { stroke: #efc183; }
+      .monitor { stroke: #9fd3e6; }
+      .line-blue { stroke: #1f7a8c; stroke-width: 3; fill: none; marker-end: url(#arrowBlue); }
+      .line-orange { stroke: #c96a28; stroke-width: 3; fill: none; marker-end: url(#arrowOrange); }
+      .line-gray { stroke: #51606b; stroke-width: 2; fill: none; marker-end: url(#arrowGray); }
+      .line-purple { stroke: #6b5bb5; stroke-width: 2; fill: none; marker-end: url(#arrowPurple); }
+      .dashed { stroke-dasharray: 8 6; }
+    </style>
+        <symbol id="az-code" viewBox="0 0 18 18"><defs><linearGradient id="code-b6397d2e-3ba1-4824-829e-9978a5335072" x1="9" y1="15.834" x2="9" y2="5.788" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0078d4" /><stop offset="0.502" stop-color="#4093e6" /><stop offset="0.775" stop-color="#5ea0ef" /></linearGradient><linearGradient id="code-b054a213-2b95-4773-bd8d-5833c021a783" x1="3.754" y1="11.614" x2="6.975" y2="11.614" gradientTransform="translate(9.78 -0.365) rotate(44.919)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5ea0ef" /><stop offset="0.372" stop-color="#9fc6f5" /><stop offset="0.8" stop-color="#e4effc" /><stop offset="1" stop-color="#fff" /></linearGradient><linearGradient id="code-ae8082eb-8439-45c6-ad31-2630ec597ba3" x1="10.83" y1="11.614" x2="14.05" y2="11.614" gradientTransform="translate(29.528 11.086) rotate(135.081)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" /><stop offset="0.2" stop-color="#e4effc" /><stop offset="0.628" stop-color="#9fc6f5" /><stop offset="1" stop-color="#5ea0ef" /></linearGradient></defs><g id="code-ab07e3c1-374c-4c6b-be01-1dbf388ebd9f"><g><path d="M.5,5.788h17a0,0,0,0,1,0,0v9.478a.568.568,0,0,1-.568.568H1.068A.568.568,0,0,1,.5,15.266V5.788A0,0,0,0,1,.5,5.788Z" fill="url(#code-b6397d2e-3ba1-4824-829e-9978a5335072)" /><path d="M1.071,2.166H16.929a.568.568,0,0,1,.568.568V5.788a0,0,0,0,1,0,0H.5a0,0,0,0,1,0,0V2.734A.568.568,0,0,1,1.071,2.166Z" fill="#0078d4" /><path d="M5.244,9.632h.49a0,0,0,0,1,0,0V13.5a.157.157,0,0,1-.157.157h-.49A.157.157,0,0,1,4.93,13.5V9.945a.314.314,0,0,1,.314-.314Z" transform="translate(-6.667 7.165) rotate(-44.919)" fill="url(#code-b054a213-2b95-4773-bd8d-5833c021a783)" /><path d="M4.951,7.3h.49a.314.314,0,0,1,.314.314v3.617a.157.157,0,0,1-.157.157h-.49a.157.157,0,0,1-.157-.157V7.3a0,0,0,0,1,0,0Z" transform="translate(2.516 19.734) rotate(-134.919)" fill="#f2f2f2" /><path d="M12.228,9.632h.49a.157.157,0,0,1,.157.157v3.873a0,0,0,0,1,0,0h-.49a.314.314,0,0,1-.314-.314V9.788a.157.157,0,0,1,.157-.157Z" transform="translate(13.081 28.701) rotate(-135.081)" fill="url(#code-ae8082eb-8439-45c6-ad31-2630ec597ba3)" /><path d="M12.2,7.3h.49a.157.157,0,0,1,.157.157v3.617a.314.314,0,0,1-.314.314h-.49a0,0,0,0,1,0,0V7.46A.157.157,0,0,1,12.2,7.3Z" transform="translate(-2.96 11.562) rotate(-45.081)" fill="#f2f2f2" /><rect x="8.547" y="6.598" width="0.806" height="7.634" rx="0.112" transform="translate(3.602 -2.233) rotate(17.752)" fill="#f2f2f2" /></g></g></symbol>
+        <symbol id="az-workflow" viewBox="0 0 18 18"><defs><linearGradient id="workflow-e4fe130c-1194-40d1-b5a4-e2bb47010cb4" x1="2.624" y1="15.969" x2="2.624" y2="11.167" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#76bc2d" /><stop offset="0.601" stop-color="#81ce31" /><stop offset="0.822" stop-color="#86d633" /></linearGradient><linearGradient id="workflow-ac1aac1d-90a5-47ab-b231-bd8d57cff665" x1="9.026" y1="18" x2="9.026" y2="13.198" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#76bc2d" /><stop offset="0.601" stop-color="#81ce31" /><stop offset="0.822" stop-color="#86d633" /></linearGradient><linearGradient id="workflow-fb43c81d-62cd-430c-b971-97ce3b11776c" x1="15.376" y1="16.001" x2="15.376" y2="11.199" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#76bc2d" /><stop offset="0.601" stop-color="#81ce31" /><stop offset="0.822" stop-color="#86d633" /></linearGradient></defs><g id="workflow-aac33089-9c97-4591-a4d0-bf17c24367ba"><g><path d="M15.509,7.868H10.052a.293.293,0,0,1-.293-.293V5.491H8.293V7.575A.294.294,0,0,1,8,7.868H2.479a.587.587,0,0,0-.587.587v2.7H3.358v-1.5a.294.294,0,0,1,.294-.293H8.293v3.918H9.759V9.368h4.577a.293.293,0,0,1,.293.293v1.53H16.1V8.455A.587.587,0,0,0,15.509,7.868Z" fill="#50e6ff" /><rect x="6.029" width="5.881" height="5.881" rx="0.532" fill="#0078d4" /><rect x="7.158" y="1.13" width="3.622" height="3.622" rx="0.328" fill="#fff" /><rect x="0.223" y="11.167" width="4.802" height="4.802" rx="0.435" fill="url(#workflow-e4fe130c-1194-40d1-b5a4-e2bb47010cb4)" /><rect x="6.624" y="13.198" width="4.802" height="4.802" rx="0.435" fill="url(#workflow-ac1aac1d-90a5-47ab-b231-bd8d57cff665)" /><rect x="12.975" y="11.199" width="4.802" height="4.802" rx="0.435" fill="url(#workflow-fb43c81d-62cd-430c-b971-97ce3b11776c)" /></g></g></symbol>
+        <symbol id="az-appreg" viewBox="0 0 18 18"><defs><linearGradient id="appreg-efeb8e96-2af0-4681-9a6a-45f9b0262f19" x1="-6518.78" y1="1118.86" x2="-6518.78" y2="1090.06" gradientTransform="matrix(0.5, 0, 0, -0.5, 3267.42, 559.99)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5ea0ef" /><stop offset="0.18" stop-color="#589eed" /><stop offset="0.41" stop-color="#4897e9" /><stop offset="0.66" stop-color="#2e8ce1" /><stop offset="0.94" stop-color="#0a7cd7" /><stop offset="1" stop-color="#0078d4" /></linearGradient></defs><path d="M5.67,10.61H10v4.32H5.67Zm-5-5.76H5V.53H1.23a.6.6,0,0,0-.6.6Zm.6,10.08H5V10.61H.63v3.72A.6.6,0,0,0,1.23,14.93Zm-.6-5H5V5.57H.63Zm10.08,5h3.72a.6.6,0,0,0,.6-.6V10.61H10.71Zm-5-5H10V5.57H5.67Zm5,0H15V5.57H10.71Zm0-9.36V4.85H15V1.13a.6.6,0,0,0-.6-.6Zm-5,4.32H10V.53H5.67Z" fill="url(#appreg-efeb8e96-2af0-4681-9a6a-45f9b0262f19)" /><polygon points="17.37 10.7 17.37 15.21 13.5 17.47 13.5 12.96 17.37 10.7" fill="#32bedd" /><polygon points="17.37 10.7 13.5 12.97 9.63 10.7 13.5 8.44 17.37 10.7" fill="#9cebff" /><polygon points="13.5 12.97 13.5 17.47 9.63 15.21 9.63 10.7 13.5 12.97" fill="#50e6ff" /><polygon points="9.63 15.21 13.5 12.96 13.5 17.47 9.63 15.21" fill="#9cebff" /><polygon points="17.37 15.21 13.5 12.96 13.5 17.47 17.37 15.21" fill="#50e6ff" /></symbol>
+        <symbol id="az-groups" viewBox="0 0 18 18"><defs><linearGradient id="groups-f97360fa-fd13-420b-9b43-74b8dde83a11" x1="6.7" y1="7.26" x2="6.7" y2="18.36" gradientUnits="userSpaceOnUse"><stop offset="0.22" stop-color="#32d4f5" /><stop offset="1" stop-color="#198ab3" /></linearGradient><linearGradient id="groups-b2ab4071-529d-4450-9443-e6dc0939cc4e" x1="6.42" y1="1.32" x2="7.23" y2="11.39" gradientUnits="userSpaceOnUse"><stop offset="0.22" stop-color="#32d4f5" /><stop offset="1" stop-color="#198ab3" /></linearGradient></defs><path d="M17.22,13.92a.79.79,0,0,0,.8-.79A.28.28,0,0,0,18,13c-.31-2.5-1.74-4.54-4.46-4.54S9.35,10.22,9.07,13a.81.81,0,0,0,.72.88h7.43Z" fill="#0078d4" /><path d="M13.55,9.09a2.44,2.44,0,0,1-1.36-.4l1.35,3.52,1.33-3.49A2.54,2.54,0,0,1,13.55,9.09Z" fill="#fff" opacity="0.8" /><circle cx="13.55" cy="6.58" r="2.51" fill="#0078d4" /><path d="M12.19,16.36a1.19,1.19,0,0,0,1.19-1.19.66.66,0,0,0,0-.14c-.47-3.74-2.6-6.78-6.66-6.78S.44,10.83,0,15a1.2,1.2,0,0,0,1.07,1.31h11.1Z" fill="url(#groups-f97360fa-fd13-420b-9b43-74b8dde83a11)" /><path d="M6.77,9.14a3.72,3.72,0,0,1-2-.6l2,5.25,2-5.21A3.81,3.81,0,0,1,6.77,9.14Z" fill="#fff" opacity="0.8" /><circle cx="6.74" cy="5.39" r="3.75" fill="url(#groups-b2ab4071-529d-4450-9443-e6dc0939cc4e)" /></symbol>
+        <symbol id="az-users" viewBox="0 0 18 18"><defs><linearGradient id="users-be92901b-ec33-4c65-adf1-9b0eed06d677" x1="9" y1="6.88" x2="9" y2="20.45" gradientUnits="userSpaceOnUse"><stop offset="0.22" stop-color="#32d4f5" /><stop offset="1" stop-color="#198ab3" /></linearGradient><linearGradient id="users-b46fc246-25d8-4398-8779-1042e8cacae7" x1="8.61" y1="-0.4" x2="9.6" y2="11.92" gradientUnits="userSpaceOnUse"><stop offset="0.22" stop-color="#32d4f5" /><stop offset="1" stop-color="#198ab3" /></linearGradient></defs><path d="M15.72,18a1.45,1.45,0,0,0,1.45-1.45.47.47,0,0,0,0-.17C16.59,11.81,14,8.09,9,8.09S1.34,11.24.83,16.39A1.46,1.46,0,0,0,2.14,18H15.72Z" fill="url(#users-be92901b-ec33-4c65-adf1-9b0eed06d677)" /><path d="M9,9.17a4.59,4.59,0,0,1-2.48-.73L9,14.86l2.44-6.38A4.53,4.53,0,0,1,9,9.17Z" fill="#fff" opacity="0.8" /><circle cx="9.01" cy="4.58" r="4.58" fill="url(#users-b46fc246-25d8-4398-8779-1042e8cacae7)" /></symbol>
+        <symbol id="az-mi" viewBox="0 0 18 18"><defs><linearGradient id="mi-bb67b154-af8f-4a53-a9ce-aa046b9398e9" x1="13.18" y1="13.01" x2="8.63" y2="4.38" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1988d9" /><stop offset="0.9" stop-color="#54aef0" /></linearGradient><linearGradient id="mi-a47d7138-084a-471d-8d63-744e75b9e8a3" x1="11.22" y1="10.5" x2="14.37" y2="15.93" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#54aef0" /><stop offset="0.29" stop-color="#4fabee" /><stop offset="0.51" stop-color="#41a2e9" /><stop offset="0.74" stop-color="#2a93e0" /><stop offset="0.88" stop-color="#1988d9" /></linearGradient></defs><g><polygon points="1.15 10.22 8.93 15.27 16.85 10.21 17.85 11.36 8.93 17.11 0.15 11.37 1.15 10.22" fill="#50e6ff" /><polygon points="1.73 9.58 8.93 1 16.28 9.59 8.93 14.23 1.73 9.58" fill="#fff" /><polygon points="8.93 1 8.93 14.23 1.73 9.58 8.93 1" fill="#50e6ff" /><polygon points="8.93 1 8.93 14.23 16.28 9.59 8.93 1" fill="url(#mi-bb67b154-af8f-4a53-a9ce-aa046b9398e9)" /><polygon points="8.93 7.83 16.28 9.59 8.93 14.23 8.93 7.83" fill="#53b1e0" /><polygon points="8.93 14.23 1.73 9.58 8.93 7.83 8.93 14.23" fill="#9cebff" /><polygon points="8.93 17.11 17.85 11.36 16.85 10.21 8.93 15.27 8.93 17.11" fill="url(#mi-a47d7138-084a-471d-8d63-744e75b9e8a3)" /><g><path id="mi-e189a61f-631a-4122-bb2b-079e86004d96" d="M16.32,11.88a1.16,1.16,0,0,0,0-1.65h0l-2-2a1.16,1.16,0,0,0-1.64,0h0l-2,2a1.18,1.18,0,0,0,0,1.65l1.67,1.67a.32.32,0,0,1,.09.23v3.1a.36.36,0,0,0,.12.28l.76.76a.25.25,0,0,0,.37,0l.73-.73h0l.44-.44a.15.15,0,0,0,0-.21l-.31-.31a.16.16,0,0,1,0-.24l.31-.31a.16.16,0,0,0,0-.22l-.31-.31a.15.15,0,0,1,0-.23l.31-.32a.15.15,0,0,0,0-.21l-.44-.44v-.16ZM13.5,8.71a.66.66,0,1,1-.66.66.66.66,0,0,1,.66-.66Z" fill="#ffca00" /><path id="mi-fb7033ee-4650-4886-80c7-eddf62560f85" d="M13,17h0a.14.14,0,0,0,.24-.11V14.33a.16.16,0,0,0-.06-.13h0a.14.14,0,0,0-.22.13v2.51A.15.15,0,0,0,13,17Z" fill="#ff9300" opacity="0.75" /><rect id="mi-b166b8c2-b9ee-4c3d-bf7a-77bd5ce0570b" x="11.9" y="10.9" width="3.29" height="0.39" rx="0.18" fill="#ff9300" opacity="0.75" /><rect id="mi-baf437fe-3483-4a25-94ba-1e84a64cd2eb" x="11.9" y="11.53" width="3.29" height="0.39" rx="0.18" fill="#ff9300" opacity="0.75" /></g></g></symbol>
+        <symbol id="az-container" viewBox="0 0 18 18"><defs><linearGradient id="container-aa32ebca-eeba-4b3a-9ee4-7e15a794a5d5" x1="9" y1="15.799" x2="9" y2="5.316" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#32bedd" /><stop offset="0.775" stop-color="#32d4f5" /></linearGradient></defs><g id="container-a9342976-9512-4674-89f1-52a588cf420b"><g><path d="M.544,5.316H17.456a0,0,0,0,1,0,0v9.918a.565.565,0,0,1-.565.565H1.109a.565.565,0,0,1-.565-.565V5.316A0,0,0,0,1,.544,5.316Z" fill="url(#container-aa32ebca-eeba-4b3a-9ee4-7e15a794a5d5)" /><path d="M1.112,2.2H16.888a.565.565,0,0,1,.565.565v2.55a0,0,0,0,1,0,0H.547a0,0,0,0,1,0,0V2.766A.565.565,0,0,1,1.112,2.2Z" fill="#0078d4" /><path d="M13.528,7.347H9.384A.228.228,0,0,1,9.26,7.31L8.077,6.523a.218.218,0,0,0-.123-.038H4.472a.222.222,0,0,0-.222.222v7.315a.221.221,0,0,0,.222.222h9.056a.221.221,0,0,0,.222-.222V7.569A.222.222,0,0,0,13.528,7.347Z" fill="#f78d1e" /><rect x="5.114" y="6.91" width="2.159" height="0.432" rx="0.091" fill="#fff" /><rect x="5.114" y="6.91" width="0.432" height="0.432" rx="0.062" fill="#d15900" /><path d="M13.528,7.337H8.977A.219.219,0,0,0,8.82,7.4l-.732.731a.22.22,0,0,1-.157.066H4.472a.221.221,0,0,0-.222.221v5.591a.221.221,0,0,0,.222.222h9.056a.221.221,0,0,0,.222-.222V7.558A.221.221,0,0,0,13.528,7.337Z" fill="#fff" /></g></g></symbol>
+        <symbol id="az-queue" viewBox="0 0 18 18"><defs><linearGradient id="queue-f6607f9a-6e3a-4339-acc9-d6f3ae1a2c0d" x1="9" y1="15.799" x2="9" y2="5.316" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a67af4" /><stop offset="0.775" stop-color="#b796f9" /></linearGradient></defs><g id="queue-f3784f80-3379-4e66-8e32-fca3fab0f4d7"><g><path d="M.544,5.316H17.456a0,0,0,0,1,0,0v9.918a.565.565,0,0,1-.565.565H1.109a.565.565,0,0,1-.565-.565V5.316A0,0,0,0,1,.544,5.316Z" fill="url(#queue-f6607f9a-6e3a-4339-acc9-d6f3ae1a2c0d)" /><path d="M1.112,2.2H16.888a.565.565,0,0,1,.565.565v2.55a0,0,0,0,1,0,0H.547a0,0,0,0,1,0,0V2.766A.565.565,0,0,1,1.112,2.2Z" fill="#773adc" /><g><rect x="2.625" y="6.435" width="3.683" height="7.933" rx="0.274" fill="#fff" /><rect x="7.158" y="6.435" width="3.683" height="7.933" rx="0.274" fill="#fff" opacity="0.75" /><rect x="11.692" y="6.435" width="3.683" height="7.933" rx="0.274" fill="#fff" opacity="0.5" /></g></g></g></symbol>
+        <symbol id="az-subscription" viewBox="0 0 18 18"><defs><radialGradient id="subscription-a445c717-9d75-44c7-ba6b-0d8f2383e560" cx="-36.63" cy="17.12" r="11.18" gradientTransform="translate(41.88 -7.4) scale(0.94 0.94)" gradientUnits="userSpaceOnUse"><stop offset="0.27" stop-color="#ffd70f" /><stop offset="0.49" stop-color="#ffcb12" /><stop offset="0.88" stop-color="#feac19" /><stop offset="1" stop-color="#fea11b" /></radialGradient></defs><path id="subscription-e3d1e58c-f78e-4fb5-9857-0c9331da9979" d="M13.56,7.19a2.07,2.07,0,0,0,0-2.93h0L10,.69a2.06,2.06,0,0,0-2.92,0h0L3.52,4.26a2.09,2.09,0,0,0,0,2.93l3,3a.61.61,0,0,1,.17.41v5.52a.7.7,0,0,0,.2.5l1.35,1.35a.45.45,0,0,0,.66,0l1.31-1.31h0l.77-.77a.26.26,0,0,0,0-.38l-.55-.56a.29.29,0,0,1,0-.42l.55-.56a.26.26,0,0,0,0-.38L10.4,13a.28.28,0,0,1,0-.41L11,12a.26.26,0,0,0,0-.38l-.77-.78v-.28Zm-5-5.64A1.18,1.18,0,1,1,7.37,2.73,1.17,1.17,0,0,1,8.54,1.55Z" fill="url(#subscription-a445c717-9d75-44c7-ba6b-0d8f2383e560)" /><path id="subscription-a21a8f7a-61cc-4035-8449-e5c8fe4d4d5e" d="M7.62,16.21h0A.25.25,0,0,0,8,16V11.55a.27.27,0,0,0-.11-.22h0a.25.25,0,0,0-.39.22V16A.27.27,0,0,0,7.62,16.21Z" fill="#ff9300" opacity="0.75" /><rect id="subscription-ecd3189c-fb1e-4a0e-a2b6-ba2f11dda484" x="5.69" y="5.45" width="5.86" height="0.69" rx="0.32" fill="#ff9300" opacity="0.75" /><rect id="subscription-a1949a3c-4818-4bd1-b236-0d970b92fc62" x="5.69" y="6.57" width="5.86" height="0.69" rx="0.32" fill="#ff9300" opacity="0.75" /></symbol>
+        <symbol id="az-rg" viewBox="0 0 18 18"><g><g><path d="M.5,15.08a.16.16,0,0,0,.08.14l1.16.65L3.7,17a.17.17,0,0,0,.23-.06l.66-1.12a.16.16,0,0,0-.06-.21l-2.3-1.3a.17.17,0,0,1-.08-.14V3.85a.16.16,0,0,1,.08-.14l2.3-1.3a.16.16,0,0,0,.06-.21L3.93,1.08A.17.17,0,0,0,3.7,1L1.78,2.11l-1.2.67a.16.16,0,0,0-.08.14V15.08Z" fill="#949494" /><path d="M2.14,3.77l.06-.06,2.3-1.3a.14.14,0,0,0,.06-.21L3.9,1.08A.15.15,0,0,0,3.68,1L1.75,2.11.56,2.78s-.05,0-.06.06l.9.51Z" fill="#a3a3a3" /><path d="M4.5,15.59l-2.3-1.3a.22.22,0,0,1-.07-.09l-1.62,1,.05,0,1.15.65,2,1.11a.15.15,0,0,0,.22-.06l.66-1.12A.14.14,0,0,0,4.5,15.59Z" fill="#a3a3a3" /></g><path d="M17.5,15.08a.16.16,0,0,1-.08.14l-1.16.65L14.3,17a.17.17,0,0,1-.23-.06l-.66-1.12a.16.16,0,0,1,.06-.21l2.3-1.3a.17.17,0,0,0,.08-.14V3.85a.16.16,0,0,0-.08-.14l-2.3-1.3a.16.16,0,0,1-.06-.21l.66-1.12A.17.17,0,0,1,14.3,1l1.92,1.09,1.2.67a.16.16,0,0,1,.08.14V15.08Z" fill="#949494" /><path d="M15.86,3.77l-.06-.06-2.3-1.3a.14.14,0,0,1-.06-.21l.66-1.12A.15.15,0,0,1,14.32,1l1.93,1.09,1.19.67s0,0,.06.06l-.9.51Z" fill="#a3a3a3" /><path d="M13.5,15.59l2.3-1.3a.22.22,0,0,0,.07-.09l1.62,1,0,0-1.15.65-2,1.11a.15.15,0,0,1-.22-.06l-.66-1.12A.14.14,0,0,1,13.5,15.59Z" fill="#a3a3a3" /><polygon points="14.31 5.93 14.31 12.07 8.99 15.16 8.99 9.01 14.31 5.93" fill="#32bedd" /><polygon points="14.31 5.93 9 9.02 3.68 5.93 9 2.84 14.31 5.93" fill="#9cebff" /><polygon points="8.99 9.02 8.99 15.16 3.68 12.07 3.68 5.93 8.99 9.02" fill="#50e6ff" /><polygon points="3.68 12.07 8.99 9.01 8.99 15.16 3.68 12.07" fill="#9cebff" /><polygon points="14.31 12.07 8.99 9.01 8.99 15.16 14.31 12.07" fill="#50e6ff" /></g></symbol>
+        <symbol id="az-appi" viewBox="0 0 18 18"><defs><radialGradient id="appi-a7a1c431-6c6d-4a8f-9a69-8da437e5b0c5" cx="9" cy="7.35" r="6.42" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#b77af4" /><stop offset="0.21" stop-color="#b378f2" /><stop offset="0.43" stop-color="#a672ed" /><stop offset="0.65" stop-color="#9267e4" /><stop offset="0.88" stop-color="#7559d8" /><stop offset="1" stop-color="#624fd0" /></radialGradient><linearGradient id="appi-ec0c4f0d-5c8e-4882-96a1-89d61808eb49" x1="9.02" y1="3.91" x2="9.08" y2="11.49" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f2f2f2" /><stop offset="0.23" stop-color="#f1f1f2" stop-opacity="0.99" /><stop offset="0.37" stop-color="#ededf1" stop-opacity="0.95" /><stop offset="0.48" stop-color="#e7e5f0" stop-opacity="0.89" /><stop offset="0.58" stop-color="#dedbee" stop-opacity="0.81" /><stop offset="0.67" stop-color="#d3ceeb" stop-opacity="0.7" /><stop offset="0.76" stop-color="#c4bee8" stop-opacity="0.57" /><stop offset="0.84" stop-color="#b4abe5" stop-opacity="0.41" /><stop offset="0.92" stop-color="#a095e1" stop-opacity="0.22" /><stop offset="0.99" stop-color="#8b7ddc" stop-opacity="0.02" /><stop offset="1" stop-color="#897bdc" stop-opacity="0" /></linearGradient></defs><path d="M10.23,17.39l.81-.87V14.2H7v2.32l.81.87A.32.32,0,0,0,8,17.5h2A.32.32,0,0,0,10.23,17.39Z" fill="#cecece" /><path d="M9,.5A5.89,5.89,0,0,0,3.09,7.07c.27,2.47,2.62,3.62,3.29,6.75a.49.49,0,0,0,.47.38h4.3a.49.49,0,0,0,.47-.38c.67-3.13,3-4.28,3.29-6.75A5.89,5.89,0,0,0,9,.5ZM7,14.2" fill="url(#appi-a7a1c431-6c6d-4a8f-9a69-8da437e5b0c5)" /><path d="M11.46,3.79a1.4,1.4,0,0,0-1.35,1.44V6H8V5.23A1.41,1.41,0,0,0,6.59,3.79,1.4,1.4,0,0,0,5.24,5.23,1.41,1.41,0,0,0,6.59,6.68h.64v6a.36.36,0,0,0,.72,0v-6h2.16v6a.36.36,0,1,0,.72,0v-6h.63a1.4,1.4,0,0,0,1.35-1.45A1.4,1.4,0,0,0,11.46,3.79ZM7.23,6H6.55a.74.74,0,0,1-.68-.77.74.74,0,0,1,.68-.77.74.74,0,0,1,.68.77Zm4.28,0h-.68V5.19a.68.68,0,1,1,1.35,0A.73.73,0,0,1,11.51,6Z" fill="url(#appi-ec0c4f0d-5c8e-4882-96a1-89d61808eb49)" /><polygon points="6.96 15.8 11.04 15.01 11.04 14.56 6.96 15.36 6.96 15.8" fill="#999" /><polygon points="11.04 16.11 11.04 15.67 6.96 16.48 6.96 16.52 7.27 16.86 11.04 16.11" fill="#999" /></symbol>
+        <symbol id="az-law" viewBox="0 0 18 18"><defs><linearGradient id="law-a997e203-1d7d-4cb9-b131-5dc44e029b46" x1="5.23" y1="17.45" x2="5.23" y2="8.09" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1988d9" /><stop offset="0.9" stop-color="#54aef0" /></linearGradient><linearGradient id="law-e122e9d8-aee5-4f1a-a60e-b1eae355daa5" x1="11.5" y1="12.45" x2="11.5" y2="0.55" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#198ab3" /><stop offset="0.01" stop-color="#198bb4" /><stop offset="0.44" stop-color="#27b2d7" /><stop offset="0.79" stop-color="#2fcbed" /><stop offset="1" stop-color="#32d4f5" /></linearGradient></defs><path d="M5.59,13.13H9.91v4.32H5.59ZM1.15,17.45H4.87V13.13H.55v3.72A.6.6,0,0,0,1.15,17.45Zm-.6-5H4.87V8.09H.55Z" fill="url(#law-a997e203-1d7d-4cb9-b131-5dc44e029b46)" /><path d="M11.5.55a5.89,5.89,0,0,1,5.95,6,5.89,5.89,0,0,1-5.95,5.95H5.55V6.5A5.89,5.89,0,0,1,11.5.55Z" fill-rule="evenodd" fill="url(#law-e122e9d8-aee5-4f1a-a60e-b1eae355daa5)" /><rect x="7.59" y="5.65" width="1.36" height="4.08" fill="#fff" /><rect x="10.31" y="7.01" width="1.36" height="2.72" fill="#fff" /><rect x="13.03" y="4.29" width="1.36" height="5.44" fill="#fff" /></symbol>
+        <symbol id="az-storage" viewBox="0 0 18 18"><defs><linearGradient id="storage-ad4c4f96-09aa-4f91-ba10-5cb8ad530f74" x1="9" y1="15.83" x2="9" y2="5.79" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#b3b3b3" /><stop offset="0.26" stop-color="#c1c1c1" /><stop offset="1" stop-color="#e6e6e6" /></linearGradient></defs><path d="M.5,5.79h17a0,0,0,0,1,0,0v9.48a.57.57,0,0,1-.57.57H1.07a.57.57,0,0,1-.57-.57V5.79A0,0,0,0,1,.5,5.79Z" fill="url(#storage-ad4c4f96-09aa-4f91-ba10-5cb8ad530f74)" /><path d="M1.07,2.17H16.93a.57.57,0,0,1,.57.57V5.79a0,0,0,0,1,0,0H.5a0,0,0,0,1,0,0V2.73A.57.57,0,0,1,1.07,2.17Z" fill="#37c2b1" /><path d="M2.81,6.89H15.18a.27.27,0,0,1,.26.27v1.4a.27.27,0,0,1-.26.27H2.81a.27.27,0,0,1-.26-.27V7.16A.27.27,0,0,1,2.81,6.89Z" fill="#fff" /><path d="M2.82,9.68H15.19a.27.27,0,0,1,.26.27v1.41a.27.27,0,0,1-.26.27H2.82a.27.27,0,0,1-.26-.27V10A.27.27,0,0,1,2.82,9.68Z" fill="#37c2b1" /><path d="M2.82,12.5H15.19a.27.27,0,0,1,.26.27v1.41a.27.27,0,0,1-.26.27H2.82a.27.27,0,0,1-.26-.27V12.77A.27.27,0,0,1,2.82,12.5Z" fill="#258277" /></symbol>
+        <symbol id="az-systopic" viewBox="0 0 18 18"><defs><linearGradient id="systopic-bc881cb0-2250-4e99-b6cd-568a96c57a9d" x1="10.467" y1="9.987" x2="10.467" y2="7.506" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#773adc" /><stop offset="1" stop-color="#a67af4" /></linearGradient><linearGradient id="systopic-f536bf50-992c-4fa0-bbf6-4d12488616d9" x1="4.288" y1="13.077" x2="4.58" y2="5.029" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5e9624" /><stop offset="1" stop-color="#76bc2d" /></linearGradient><linearGradient id="systopic-f6c8ad87-986c-41f6-be34-270b4e00d1b0" x1="8.711" y1="13.237" x2="9.003" y2="5.189" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5e9624" /><stop offset="1" stop-color="#76bc2d" /></linearGradient><linearGradient id="systopic-bbbaf763-e5a9-4da8-9d1e-32d9d3fe8ff0" x1="8.915" y1="13.245" x2="9.207" y2="5.197" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5e9624" /><stop offset="1" stop-color="#76bc2d" /></linearGradient><linearGradient id="systopic-aa6fdf52-a4ca-43f3-b8a8-2f510d97420f" x1="4.471" y1="13.083" x2="4.763" y2="5.035" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5e9624" /><stop offset="1" stop-color="#76bc2d" /></linearGradient></defs><path d="M.613.993H1.976V4.775a.306.306,0,0,1-.306.306H.307A.306.306,0,0,1,0,4.775V1.606A.6.6,0,0,1,.592.993Z" fill="#a3a3a3" /><path d="M.613.993H1.976V4.775a.306.306,0,0,1-.306.306H.307A.306.306,0,0,1,0,4.775V1.606A.6.6,0,0,1,.592.993Z" fill="#a3a3a3" opacity="0.5" /><path d="M16.025.993h1.362a.6.6,0,0,1,.6.6v3.18a.306.306,0,0,1-.306.306H16.331a.306.306,0,0,1-.306-.306V.993Z" fill="#a3a3a3" /><path d="M16.025.993h1.362a.6.6,0,0,1,.6.6v3.18a.306.306,0,0,1-.306.306H16.331a.306.306,0,0,1-.306-.306V.993Z" fill="#a3a3a3" opacity="0.5" /><path d="M17.989,1.585v1.32H.032V1.585a.6.6,0,0,1,.6-.6H17.387A.6.6,0,0,1,17.989,1.585Z" fill="#949494" /><path d="M.307,12.9H1.67a.306.306,0,0,1,.306.306v3.813H.613A.6.6,0,0,1,0,16.426c0-.011,0-.021,0-.032V13.225A.306.306,0,0,1,.285,12.9Z" fill="#a3a3a3" /><path d="M.307,12.9H1.67a.306.306,0,0,1,.306.306v3.813H.613A.6.6,0,0,1,0,16.426c0-.011,0-.021,0-.032V13.225A.306.306,0,0,1,.285,12.9Z" fill="#a3a3a3" opacity="0.5" /><path d="M16.331,12.9h1.363A.306.306,0,0,1,18,13.2h0v3.169a.6.6,0,0,1-.6.6H16.025v-3.75a.306.306,0,0,1,.284-.327Z" fill="#a3a3a3" /><path d="M16.331,12.9h1.363A.306.306,0,0,1,18,13.2h0v3.169a.6.6,0,0,1-.6.6H16.025v-3.75a.306.306,0,0,1,.284-.327Z" fill="#a3a3a3" opacity="0.5" /><path d="M0,16.415V15.1H17.958v1.32a.6.6,0,0,1-.6.6H.6A.6.6,0,0,1,0,16.415Z" fill="#949494" /><path d="M15.436,8.828,13.3,6.664a.106.106,0,0,0-.148-.019.105.105,0,0,0-.04.1V8.075a.1.1,0,0,1-.092.117H7.83a1.237,1.237,0,0,0-.976-.482c-.042,0-.084-.006-.125-.006a1.294,1.294,0,0,0-.122,2.582q.061.006.123.006c.041,0,.083,0,.124-.006a1.272,1.272,0,0,0,.987-.494H13a.106.106,0,0,1,.1.094V11.2a.107.107,0,0,0,.1.11h0a.1.1,0,0,0,.082-.039l2.141-2.129A.235.235,0,0,0,15.436,8.828Z" fill="url(#systopic-bc881cb0-2250-4e99-b6cd-568a96c57a9d)" /><path d="M2.746,5.448V8.531H4.7A2.073,2.073,0,0,1,6.33,6.943v-2H3.246A.5.5,0,0,0,2.746,5.448Z" fill="url(#systopic-f536bf50-992c-4fa0-bbf6-4d12488616d9)" /><path d="M10.259,4.947H7.175v2a2.059,2.059,0,0,1,.99.451h2.594V5.447A.5.5,0,0,0,10.259,4.947Z" fill="url(#systopic-f6c8ad87-986c-41f6-be34-270b4e00d1b0)" /><path d="M7.175,11.053v1.979h3.084a.5.5,0,0,0,.5-.5v-1.94H8.179A2.046,2.046,0,0,1,7.175,11.053Z" fill="url(#systopic-bbbaf763-e5a9-4da8-9d1e-32d9d3fe8ff0)" /><path d="M4.7,9.448H2.746v3.084a.5.5,0,0,0,.5.5H6.33V11.043A2.036,2.036,0,0,1,4.7,9.448Z" fill="url(#systopic-aa6fdf52-a4ca-43f3-b8a8-2f510d97420f)" />​</symbol>
+        <symbol id="az-func" viewBox="0 0 18 18"><defs><linearGradient id="func-b403aca7-f387-4434-96b4-ae157edc835f" x1="-175.993" y1="-343.723" x2="-175.993" y2="-359.232" gradientTransform="translate(212.573 370.548) scale(1.156 1.029)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fea11b" /><stop offset="0.284" stop-color="#fea51a" /><stop offset="0.547" stop-color="#feb018" /><stop offset="0.8" stop-color="#ffc314" /><stop offset="1" stop-color="#ffd70f" /></linearGradient></defs><g><path d="M2.37,7.475H3.2a.267.267,0,0,1,.267.267v6.148a.533.533,0,0,1-.533.533H2.1a0,0,0,0,1,0,0V7.741a.267.267,0,0,1,.267-.267Z" transform="translate(12.507 16.705) rotate(134.919)" fill="#50e6ff" /><path d="M2.325,3.6h.833a.267.267,0,0,1,.267.267v6.583a0,0,0,0,1,0,0H2.591a.533.533,0,0,1-.533-.533V3.865A.267.267,0,0,1,2.325,3.6Z" transform="translate(5.759 0.114) rotate(44.919)" fill="#1490df" /></g><g><path d="M14.53,7.475h.833a.533.533,0,0,1,.533.533v6.148a.267.267,0,0,1-.267.267H14.8a.267.267,0,0,1-.267-.267V7.475a0,0,0,0,1,0,0Z" transform="translate(12.223 -7.555) rotate(45.081)" fill="#50e6ff" /><path d="M15.108,3.6h.833a0,0,0,0,1,0,0v6.583a.267.267,0,0,1-.267.267h-.833a.267.267,0,0,1-.267-.267V4.131a.533.533,0,0,1,.533-.533Z" transform="translate(31.022 1.222) rotate(135.081)" fill="#1490df" /></g><path d="M8.459,9.9H4.87a.193.193,0,0,1-.2-.181.166.166,0,0,1,.018-.075L8.991,1.13a.206.206,0,0,1,.186-.106h4.245a.193.193,0,0,1,.2.181.165.165,0,0,1-.035.1L8.534,7.966h4.928a.193.193,0,0,1,.2.181.176.176,0,0,1-.052.122L5.421,16.788c-.077.046-.624.5-.356-.189h0Z" fill="url(#func-b403aca7-f387-4434-96b4-ae157edc835f)" /></symbol>
+        <symbol id="az-plan" viewBox="0 0 18 18"><defs><linearGradient id="plan-a773af38-43e4-4fd2-9485-f8aac63ca91b" x1="5.57" y1="17.5" x2="5.57" y2="0.5" gradientUnits="userSpaceOnUse"><stop offset="0.05" stop-color="#949494" /><stop offset="0.36" stop-color="#979797" /><stop offset="0.54" stop-color="#9f9f9f" /><stop offset="0.69" stop-color="#adadad" /><stop offset="0.73" stop-color="#b3b3b3" /></linearGradient><linearGradient id="plan-b4779ae6-74a5-486d-8aad-cd011859785a" x1="10.56" y1="6.02" x2="10.56" y2="19.71" gradientUnits="userSpaceOnUse"><stop offset="0.18" stop-color="#5ea0ef" /><stop offset="1" stop-color="#0078d4" /></linearGradient></defs><path d="M10.56,16.93a.56.56,0,0,1-.57.57H1.14a.56.56,0,0,1-.56-.57V1.07A.56.56,0,0,1,1.14.5H10a.56.56,0,0,1,.57.57Z" fill="url(#plan-a773af38-43e4-4fd2-9485-f8aac63ca91b)" /><path d="M2,6.46A1.08,1.08,0,0,1,3.13,5.38h5A1.08,1.08,0,0,1,9.18,6.46h0A1.08,1.08,0,0,1,8.1,7.55h-5A1.09,1.09,0,0,1,2,6.46Z" fill="#003067" /><path d="M2,3.24A1.09,1.09,0,0,1,3.13,2.15h5A1.08,1.08,0,0,1,9.18,3.24h0A1.08,1.08,0,0,1,8.1,4.32h-5A1.08,1.08,0,0,1,2,3.24Z" fill="#003067" /><circle cx="3.17" cy="3.24" r="0.73" fill="#50e6ff" /><circle cx="3.17" cy="6.46" r="0.73" fill="#50e6ff" /><path d="M17.42,14.38a3.12,3.12,0,0,0-2.67-3,3.93,3.93,0,0,0-4-3.8,4,4,0,0,0-3.83,2.66A3.7,3.7,0,0,0,3.7,13.83,3.77,3.77,0,0,0,7.56,17.5l.34,0h6.26l.17,0A3.15,3.15,0,0,0,17.42,14.38Z" fill="url(#plan-b4779ae6-74a5-486d-8aad-cd011859785a)" /><rect width="18" height="18" fill="none" /></symbol>
+        <symbol id="az-sqldb" viewBox="0 0 18 18"><defs><linearGradient id="sqldb-ef16bf9d-a8b6-4181-b6cd-66fc5203f956" x1="2.59" y1="10.16" x2="15.41" y2="10.16" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#005ba1" /><stop offset="0.07" stop-color="#0060a9" /><stop offset="0.36" stop-color="#0071c8" /><stop offset="0.52" stop-color="#0078d4" /><stop offset="0.64" stop-color="#0074cd" /><stop offset="0.82" stop-color="#006abb" /><stop offset="1" stop-color="#005ba1" /></linearGradient><radialGradient id="sqldb-bf3846c3-4d74-4743-ab9a-f334c248bd92" cx="9.36" cy="10.57" r="7.07" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f2f2f2" /><stop offset="0.58" stop-color="#eee" /><stop offset="1" stop-color="#e6e6e6" /></radialGradient></defs><path d="M9,5.14c-3.54,0-6.41-1-6.41-2.32V15.18c0,1.27,2.82,2.3,6.32,2.32H9c3.54,0,6.41-1,6.41-2.32V2.82C15.41,4.11,12.54,5.14,9,5.14Z" fill="url(#sqldb-ef16bf9d-a8b6-4181-b6cd-66fc5203f956)" /><path d="M15.41,2.82c0,1.29-2.87,2.32-6.41,2.32s-6.41-1-6.41-2.32S5.46.5,9,.5s6.41,1,6.41,2.32" fill="#e8e8e8" /><path d="M13.92,2.63c0,.82-2.21,1.48-4.92,1.48S4.08,3.45,4.08,2.63,6.29,1.16,9,1.16s4.92.66,4.92,1.47" fill="#50e6ff" /><path d="M9,3a11.55,11.55,0,0,0-3.89.57A11.42,11.42,0,0,0,9,4.11a11.15,11.15,0,0,0,3.89-.58A11.84,11.84,0,0,0,9,3Z" fill="#198ab3" /><path d="M12.9,11.4V8H12v4.13h2.46V11.4ZM5.76,9.73a1.83,1.83,0,0,1-.51-.31.44.44,0,0,1-.12-.32.34.34,0,0,1,.15-.3.68.68,0,0,1,.42-.12,1.62,1.62,0,0,1,1,.29V8.11a2.58,2.58,0,0,0-1-.16,1.64,1.64,0,0,0-1.09.34,1.08,1.08,0,0,0-.42.89c0,.51.32.91,1,1.21a2.88,2.88,0,0,1,.62.36.42.42,0,0,1,.15.32.38.38,0,0,1-.16.31.81.81,0,0,1-.45.11,1.66,1.66,0,0,1-1.09-.42V12a2.17,2.17,0,0,0,1.07.24,1.88,1.88,0,0,0,1.18-.33A1.08,1.08,0,0,0,6.84,11a1.05,1.05,0,0,0-.25-.7A2.42,2.42,0,0,0,5.76,9.73ZM11,11.32a2.34,2.34,0,0,0,.33-1.26A2.32,2.32,0,0,0,11,9a1.81,1.81,0,0,0-.7-.75,2,2,0,0,0-1-.26,2.11,2.11,0,0,0-1.08.27A1.86,1.86,0,0,0,7.49,9a2.46,2.46,0,0,0-.26,1.14,2.26,2.26,0,0,0,.24,1,1.76,1.76,0,0,0,.69.74,2.06,2.06,0,0,0,1,.3l.86,1h1.21L10,12.08A1.79,1.79,0,0,0,11,11.32ZM10,11.07a.94.94,0,0,1-.76.35.92.92,0,0,1-.76-.36,1.52,1.52,0,0,1-.29-1,1.53,1.53,0,0,1,.29-1,1,1,0,0,1,.78-.37.87.87,0,0,1,.75.37,1.62,1.62,0,0,1,.27,1A1.46,1.46,0,0,1,10,11.07Z" fill="url(#sqldb-bf3846c3-4d74-4743-ab9a-f334c248bd92)" /></symbol>
+        <symbol id="az-sqlserver" viewBox="0 0 18 18"><defs><linearGradient id="sqlserver-b39dcf83-187e-4c64-98df-431bb60809d2" x1="0.5" y1="10.04" x2="13.18" y2="10.04" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#005ba1" /><stop offset="0.07" stop-color="#0060a9" /><stop offset="0.36" stop-color="#0071c8" /><stop offset="0.52" stop-color="#0078d4" /><stop offset="0.64" stop-color="#0074cd" /><stop offset="0.82" stop-color="#006abb" /><stop offset="1" stop-color="#005ba1" /></linearGradient></defs><path d="M6.84,5.09c-3.5,0-6.34-1-6.34-2.3V15c0,1.26,2.79,2.28,6.25,2.3h.09c3.5,0,6.34-1,6.34-2.3V2.79C13.18,4.06,10.34,5.09,6.84,5.09Z" fill="url(#sqlserver-b39dcf83-187e-4c64-98df-431bb60809d2)" /><path d="M13.18,2.79c0,1.27-2.84,2.3-6.34,2.3S.5,4.06.5,2.79,3.34.49,6.84.49s6.34,1,6.34,2.3" fill="#e8e8e8" /><path d="M11.7,2.6c0,.81-2.18,1.46-4.86,1.46S2,3.41,2,2.6,4.16,1.14,6.84,1.14,11.7,1.8,11.7,2.6" fill="#50e6ff" /><path d="M6.84,2.94A12,12,0,0,0,3,3.49a11.25,11.25,0,0,0,3.85.57,11.25,11.25,0,0,0,3.85-.57A12,12,0,0,0,6.84,2.94Z" fill="#198ab3" /><path d="M10.74,11.1V7.72H9.81v4.14h2.46V11.1ZM3.59,9.43a1.92,1.92,0,0,1-.51-.31A.44.44,0,0,1,3,8.8a.38.38,0,0,1,.16-.31.72.72,0,0,1,.42-.11,1.67,1.67,0,0,1,1,.29V7.81a2.67,2.67,0,0,0-1-.16A1.74,1.74,0,0,0,2.38,8a1.13,1.13,0,0,0-.41.9c0,.51.32.91,1,1.21a2.9,2.9,0,0,1,.61.36.4.4,0,0,1,.16.32.38.38,0,0,1-.16.31.75.75,0,0,1-.45.12A1.6,1.6,0,0,1,2,10.77v.93a2.29,2.29,0,0,0,1.07.23,2,2,0,0,0,1.18-.32,1.1,1.1,0,0,0,.43-.92,1,1,0,0,0-.25-.7A2.42,2.42,0,0,0,3.59,9.43ZM8.79,11a2.4,2.4,0,0,0,.33-1.27,2.32,2.32,0,0,0-.25-1.1,1.81,1.81,0,0,0-.7-.75,2,2,0,0,0-1-.26,2.18,2.18,0,0,0-1.09.27,1.87,1.87,0,0,0-.73.77,2.41,2.41,0,0,0-.26,1.15,2.26,2.26,0,0,0,.24,1.05,1.83,1.83,0,0,0,.68.75,2,2,0,0,0,1,.29l.85,1H9.05l-1.2-1.11A1.81,1.81,0,0,0,8.79,11Zm-.93-.26a1,1,0,0,1-1.53,0,1.51,1.51,0,0,1-.28-1,1.48,1.48,0,0,1,.29-1,.92.92,0,0,1,.78-.37.89.89,0,0,1,.75.37,1.62,1.62,0,0,1,.27,1A1.46,1.46,0,0,1,7.86,10.77Z" fill="#f2f2f2" /><path d="M14.81,17.49l.24-.79.47-.27.81.36.52-.53V16.2l-.37-.71.22-.5.81-.29.09,0v-.73l-.1,0-.8-.24-.26-.46.35-.82-.53-.51H16.2l-.71.36L15,12l-.32-.89h-.74l0,.11-.24.79-.51.22-.87-.4-.51.53.05.1.38.74-.2.51L11.1,14v.74l.11,0,.79.24.22.51-.39.86.53.52.09-.05.74-.38.51.2.34.89h.73Zm-1.2-2.36a1.06,1.06,0,1,1,1.49-1.52,1.06,1.06,0,0,1-1.49,1.52Z" fill="#949494" /></symbol>
+    </defs>
+
+    <rect width="1720" height="1090" fill="url(#bg)" />
+    <circle cx="1500" cy="110" r="190" fill="#d8edf5" opacity="0.28" />
+    <circle cx="170" cy="960" r="220" fill="#f0d9be" opacity="0.22" />
+
+    <text x="60" y="72" class="title">Blob-to-SQL Infrastructure</text>
+    <text x="60" y="104" class="subtitle">Repository-driven Azure deployment with GitHub OIDC,
+        Terraform, Function Flex Consumption, Event Grid and Azure SQL</text>
+
+    <!-- ============ GitHub ============ -->
+    <rect x="40" y="140" width="360" height="400" rx="26" fill="#fffaf1" stroke="#d8bfa1"
+        stroke-width="2" filter="url(#shadow)" />
+    <text x="65" y="182" class="section">GitHub</text>
+
+    <rect x="65" y="205" width="310" height="130" rx="14" class="card repo" />
+    <use href="#az-code" x="81" y="221" width="44" height="44" />
+    <text x="137" y="241" class="label">Repository</text>
+    <text x="137" y="259" class="kind">blob-to-sql</text>
+    <text x="81" y="295" class="body">BlobToSql module &#183; build/ &#183; function/</text>
+    <text x="81" y="315" class="body">infra/ (Terraform) &#183; database/ (SQL project)</text>
+
+    <rect x="65" y="355" width="310" height="160" rx="14" class="card deploy" />
+    <use href="#az-workflow" x="81" y="371" width="44" height="44" />
+    <text x="137" y="391" class="label">GitHub Actions</text>
+    <text x="137" y="409" class="kind">csv-upload-to-azure-sql.yml</text>
+    <text x="81" y="445" class="body"><tspan class="strong">PR:</tspan> tests, terraform plan, dacpac preview</text>
+    <text x="81" y="467" class="body"><tspan class="strong">main:</tspan> apply &#8594; dacpac &#8594; function zip</text>
+    <text x="81" y="489" class="body"><tspan class="strong">1st run:</tspan> 2nd apply adds Event Grid sub</text>
+
+    <!-- ============ Entra ID and bootstrap ============ -->
+    <rect x="40" y="570" width="360" height="455" rx="26" fill="#f8f7ff" stroke="#c7bce8"
+        stroke-width="2" filter="url(#shadow)" />
+    <text x="65" y="612" class="section">Entra ID and Bootstrap</text>
+
+    <rect x="65" y="635" width="310" height="115" rx="14" class="card identity" />
+    <use href="#az-appreg" x="81" y="651" width="44" height="44" />
+    <text x="137" y="671" class="label">App Registration</text>
+    <text x="137" y="689" class="kind">GitHub OIDC federation</text>
+    <text x="81" y="722" class="body">Federated credential, no client secret</text>
+    <text x="81" y="740" class="body">RBAC on subscription and state backend</text>
+
+    <rect x="65" y="762" width="310" height="115" rx="14" class="card identity" />
+    <use href="#az-groups" x="81" y="778" width="44" height="44" />
+    <text x="137" y="798" class="label">SQL Admin Group</text>
+    <text x="137" y="816" class="kind">Entra security group</text>
+    <text x="81" y="849" class="body">Entra-only administrator of SQL server</text>
+    <text x="81" y="867" class="body">Members: operators and CI identity</text>
+
+    <rect x="65" y="889" width="310" height="115" rx="14" class="card storage" />
+    <use href="#az-container" x="81" y="905" width="44" height="44" />
+    <text x="137" y="925" class="label">Terraform State</text>
+    <text x="137" y="943" class="kind">azurerm backend, Entra auth</text>
+    <text x="81" y="976" class="body">Created by setup script, remote locking</text>
+    <text x="81" y="994" class="body">Holds function host key for the webhook</text>
+
+    <!-- ============ Azure subscription ============ -->
+    <rect x="460" y="140" width="1220" height="885" rx="26" fill="#f7fcff" stroke="#a9cad8"
+        stroke-width="2" filter="url(#shadow)" />
+    <use href="#az-subscription" x="484" y="158" width="32" height="32" />
+    <text x="526" y="182" class="section">Azure Subscription</text>
+
+    <rect x="485" y="210" width="1170" height="790" rx="22" fill="#ffffff" stroke="#b9d3df"
+        stroke-width="2" />
+    <use href="#az-rg" x="508" y="228" width="30" height="30" />
+    <text x="548" y="249" class="section" style="font-size:17px">Resource group rg-&lt;prefix&gt;-&lt;suffix&gt;</text>
+    <text x="548" y="270" class="tiny">Terraform-managed, location and tags from variables</text>
+
+    <!-- Row A: sources and supporting services -->
+    <rect x="515" y="295" width="225" height="150" rx="14" class="card storage" />
+    <use href="#az-users" x="531" y="311" width="44" height="44" />
+    <text x="587" y="331" class="label">CSV Upload</text>
+    <text x="587" y="349" class="kind">Operators / source systems</text>
+    <text x="531" y="389" class="body">Drop *.csv into incoming</text>
+    <text x="531" y="409" class="body">Admins: Blob Data Contributor</text>
+
+    <rect x="810" y="295" width="225" height="150" rx="14" class="card monitor" />
+    <use href="#az-appi" x="826" y="311" width="44" height="44" />
+    <text x="882" y="331" class="label">Monitoring</text>
+    <text x="882" y="349" class="kind">Application Insights</text>
+    <use href="#az-law" x="826" y="376" width="18" height="18" />
+    <text x="850" y="389" class="body">Log Analytics workspace</text>
+    <text x="826" y="413" class="body">Function logs and traces</text>
+
+    <rect x="1105" y="295" width="225" height="150" rx="14" class="card storage" />
+    <use href="#az-storage" x="1121" y="311" width="44" height="44" />
+    <text x="1177" y="331" class="label">Host Storage</text>
+    <text x="1177" y="349" class="kind">Storage account</text>
+    <text x="1121" y="389" class="body">Runtime state, trigger queue</text>
+    <use href="#az-container" x="1121" y="400" width="18" height="18" />
+    <text x="1145" y="413" class="body">app-package container</text>
+    <text x="1121" y="435" class="tiny">AzureWebJobsStorage via MI</text>
+
+    <rect x="1400" y="295" width="225" height="150" rx="14" class="card identity" />
+    <use href="#az-mi" x="1416" y="311" width="44" height="44" />
+    <text x="1472" y="331" class="label">Identity</text>
+    <text x="1472" y="349" class="kind">User-assigned MI</text>
+    <text x="1416" y="389" class="body">Known client ID for the</text>
+    <text x="1416" y="409" class="body">SQL CREATE USER mapping</text>
+    <text x="1416" y="433" class="tiny">No Graph lookup needed</text>
+
+    <!-- Row B: data path -->
+    <rect x="515" y="535" width="225" height="180" rx="14" class="card storage" />
+    <use href="#az-storage" x="531" y="551" width="44" height="44" />
+    <text x="587" y="571" class="label">Data Storage</text>
+    <text x="587" y="589" class="kind">Storage account</text>
+    <use href="#az-container" x="531" y="614" width="18" height="18" />
+    <text x="555" y="627" class="body">incoming (upload)</text>
+    <use href="#az-container" x="531" y="638" width="18" height="18" />
+    <text x="555" y="651" class="body">processed / failed</text>
+    <use href="#az-queue" x="531" y="662" width="18" height="18" />
+    <text x="555" y="675" class="body">Poison queue</text>
+    <text x="531" y="701" class="tiny">Blob + queue access via MI</text>
+
+    <rect x="810" y="535" width="225" height="180" rx="14" class="card events" />
+    <use href="#az-systopic" x="826" y="551" width="44" height="44" />
+    <text x="882" y="571" class="label">Event Grid</text>
+    <text x="882" y="589" class="kind">System topic</text>
+    <text x="826" y="627" class="body">BlobCreated on data storage</text>
+    <text x="826" y="651" class="body">Filter: path + extensions</text>
+    <text x="826" y="677" class="tiny">Webhook with function host key</text>
+
+    <rect x="1105" y="535" width="225" height="180" rx="14" class="card compute" />
+    <use href="#az-func" x="1121" y="551" width="44" height="44" />
+    <text x="1177" y="571" class="label">Function App</text>
+    <text x="1177" y="589" class="kind">Flex Consumption</text>
+    <text x="1121" y="627" class="body">Import-CsvBlob (PowerShell)</text>
+    <use href="#az-plan" x="1121" y="638" width="18" height="18" />
+    <text x="1145" y="651" class="body">Linux FC1 plan</text>
+    <text x="1121" y="677" class="tiny">System-assigned MI for storage</text>
+    <text x="1121" y="697" class="tiny">Moves handled files via MI</text>
+
+    <rect x="1400" y="535" width="225" height="180" rx="14" class="card data" />
+    <use href="#az-sqldb" x="1416" y="551" width="44" height="44" />
+    <text x="1472" y="571" class="label">Azure SQL</text>
+    <text x="1472" y="589" class="kind">Database</text>
+    <text x="1416" y="627" class="body">ImportedRecord (dacpac)</text>
+    <use href="#az-sqlserver" x="1416" y="638" width="18" height="18" />
+    <text x="1440" y="651" class="body">Entra-only SQL server</text>
+    <text x="1416" y="677" class="tiny">MI user in app_importer role</text>
+
+    <!-- Connectors: data path -->
+    <path d="M627 445 V531" class="line-blue" />
+    <path d="M740 615 H806" class="line-blue" />
+    <path d="M1035 615 H1101" class="line-blue" />
+    <path d="M1330 615 H1396" class="line-blue" />
+    <path d="M1190 715 V750 H627 V719" class="line-blue dashed" />
+    <text x="908" y="744" class="tiny halo" text-anchor="middle">reads the blob, then moves it to processed, or to failed with &lt;name&gt;.error.txt</text>
+
+    <circle cx="627" cy="488" r="12" fill="#1f7a8c" /><text x="627" y="493" class="badge-text">1</text>
+    <circle cx="773" cy="615" r="12" fill="#1f7a8c" /><text x="773" y="620" class="badge-text">2</text>
+    <circle cx="1068" cy="615" r="12" fill="#1f7a8c" /><text x="1068" y="620" class="badge-text">3</text>
+    <circle cx="1363" cy="615" r="12" fill="#1f7a8c" /><text x="1363" y="620" class="badge-text">4</text>
+    <circle cx="1190" cy="750" r="12" fill="#1f7a8c" /><text x="1190" y="755" class="badge-text">5</text>
+
+    <!-- Connectors: platform and identity -->
+    <path d="M1135 535 V490 H922 V449" class="line-gray dashed" />
+    <text x="935" y="483" class="tiny">telemetry</text>
+    <path d="M1235 445 V531" class="line-gray" />
+    <text x="1243" y="480" class="tiny">package +</text>
+    <text x="1243" y="495" class="tiny">runtime state</text>
+    <path d="M1440 445 V510 H1310 V531" class="line-purple dashed" />
+    <text x="1448" y="480" class="tiny">attached</text>
+    <path d="M1590 445 V531" class="line-purple dashed" />
+    <text x="1582" y="480" class="tiny" text-anchor="end">DB user</text>
+
+    <!-- Data path explanation -->
+    <rect x="515" y="785" width="1110" height="190" rx="14" fill="#f7fbfd" stroke="#d3e3ea" stroke-width="1.5" />
+    <text x="523" y="817" class="label">Data path</text>
+
+    <circle cx="535" cy="850" r="12" fill="#1f7a8c" /><text x="535" y="855" class="badge-text">1</text>
+    <text x="555" y="848" class="body">CSV lands in the incoming</text>
+    <text x="555" y="866" class="body">container of data storage</text>
+
+    <circle cx="749" cy="850" r="12" fill="#1f7a8c" /><text x="749" y="855" class="badge-text">2</text>
+    <text x="769" y="848" class="body">Event Grid: BlobCreated,</text>
+    <text x="769" y="866" class="body">filtered by path + extension</text>
+
+    <circle cx="963" cy="850" r="12" fill="#1f7a8c" /><text x="963" y="855" class="badge-text">3</text>
+    <text x="983" y="848" class="body">Import-CsvBlob parses</text>
+    <text x="983" y="866" class="body">and validates the CSV</text>
+
+    <circle cx="1177" cy="850" r="12" fill="#1f7a8c" /><text x="1177" y="855" class="badge-text">4</text>
+    <text x="1197" y="848" class="body">Rows are upserted into</text>
+    <text x="1197" y="866" class="body">ImportedRecord (SQL binding)</text>
+
+    <circle cx="1391" cy="850" r="12" fill="#1f7a8c" /><text x="1391" y="855" class="badge-text">5</text>
+    <text x="1411" y="848" class="body">File moves to processed,</text>
+    <text x="1411" y="866" class="body">or to failed + .error.txt</text>
+
+    <line x1="535" y1="895" x2="1605" y2="895" stroke="#d3e3ea" stroke-width="1.5" />
+    <text x="535" y="925" class="body"><tspan class="strong">Deploy order:</tspan> terraform apply &#8594; delete AzureWebJobsStorage setting &#8594; SqlPackage publishes BlobToSqlDb.dacpac &#8594; function zip deploy.</text>
+    <text x="535" y="947" class="body"><tspan class="strong">First deploy:</tspan> a second terraform apply creates the Event Grid subscription, because the webhook endpoint exists only after the code is live.</text>
+
+    <!-- Connectors: GitHub to Azure and Entra -->
+    <path d="M220 335 V351" class="line-gray" />
+    <path d="M375 435 H481" class="line-orange" />
+    <text x="430" y="424" class="tiny halo" text-anchor="middle">deploy</text>
+    <text x="430" y="456" class="tiny halo" text-anchor="middle">via OIDC</text>
+    <path d="M330 515 V631" class="line-orange dashed" />
+    <text x="320" y="559" class="tiny halo" text-anchor="end">OIDC token exchange</text>
+
+    <!-- Legend -->
+    <g transform="translate(460 1050)">
+        <path d="M0 0 H36" class="line-blue" /><text x="46" y="4" class="tiny">data flow</text>
+        <path d="M130 0 H166" class="line-orange" /><text x="176" y="4" class="tiny">deployment</text>
+        <path d="M272 0 H308" class="line-gray" /><text x="318" y="4" class="tiny">platform dependency</text>
+        <path d="M456 0 H492" class="line-purple dashed" /><text x="502" y="4" class="tiny">identity</text>
+    </g>
+    <text x="1680" y="1054" class="tiny" text-anchor="end">Icons: Microsoft Azure Architecture Icons</text>
+</svg>
