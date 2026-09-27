@@ -46,7 +46,7 @@ if $prod; then
   command="JEKYLL_ENV=production $command"
 fi
 
-if [ -e /proc/1/cgroup ] && grep -q docker /proc/1/cgroup; then
+if [ -e /.dockerenv ] || ([ -e /proc/1/cgroup ] && grep -Eq 'docker|containerd|kubepods' /proc/1/cgroup); then
   command="$command --force_polling"
 fi
 
