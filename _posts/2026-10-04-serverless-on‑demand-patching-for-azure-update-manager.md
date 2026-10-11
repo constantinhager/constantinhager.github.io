@@ -2,6 +2,7 @@
 layout: post
 title: "Serverless On-Demand Patching for Azure Update Manager"
 date: 2026-10-04
+categories: [Azure, PowerShell, Terraform, "GitHub Actions"]
 tags: [Azure, PowerShell, "Azure Update Manager", "Azure Functions", Terraform, "GitHub Actions", PSModuleDevelopment, "Managed Identity"]
 ---
 

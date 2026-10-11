@@ -2,6 +2,7 @@
 layout: post
 title: "Dev Containers for PowerShell, Part 1: Set Up Once, Use Anywhere"
 date: 2026-10-11
+categories: [PowerShell, Dev Containers]
 tags: [PowerShell, "VS Code", "Dev Containers", "GitHub Codespaces"]
 ---
 
