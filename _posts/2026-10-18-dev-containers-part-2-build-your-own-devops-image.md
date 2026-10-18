@@ -8,7 +8,7 @@ tags: [PowerShell, "VS Code", "Dev Containers","GitHub Actions", "Azure Containe
 
 Series table of contents:
 
-- [Part 1: Setup Once, Use Anywhere](2026-10-11-dev-containers-part-1-setup-once-use-anywhere)
+- [Part 1: Setup Once, Use Anywhere]({% post_url 2026-10-11-dev-containers-part-1-setup-once-use-anywhere %})
 
 In this part I build my own image for DevOps work: PowerShell, Terraform, TFLint, Ansible, Azure CLI, kubectl, Helm and
 the GitHub CLI are baked in. GitHub Actions builds the image, tests it and pushes it to my own Azure Container Registry.
