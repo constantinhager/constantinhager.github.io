@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1804" height="1810" viewBox="0 0 1804 1810" role="img" aria-labelledby="title desc">
+  <title id="title">VS Code style folder structure for BlogAssets</title>
+  <desc id="desc">A Visual Studio Code Explorer style tree for the BlogAssets repository. It shows .github/workflows/dev-containers-part-2.yml and the Dev Containers Part 2 Build Your Own Image folder with its .devcontainer, assets, image, infra, scripts, .gitattributes and README.md contents.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#151515"/>
+      <stop offset="100%" stop-color="#101010"/>
+    </linearGradient>
+    <linearGradient id="pane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e1e1e"/>
+      <stop offset="100%" stop-color="#181818"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+
+    <style>
+      text {
+        fill: #cccccc;
+        font-family: "Segoe UI", "Inter", Arial, sans-serif;
+      }
+      .heading {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 1.4px;
+        fill: #d4d4d4;
+      }
+      .subheading {
+        font-size: 18px;
+        font-weight: 600;
+        fill: #a6a6a6;
+        letter-spacing: 0.8px;
+      }
+      .rowtext {
+        font-size: 26px;
+      }
+      .hint {
+        font-size: 18px;
+        fill: #8f8f8f;
+      }
+      .guide {
+        stroke: #303030;
+        stroke-width: 1;
+      }
+    </style>
+
+    <symbol id="chevron-right" viewBox="0 0 16 16">
+      <path d="M5 3.5 10.5 8 5 12.5Z" fill="#8f8f8f"/>
+    </symbol>
+
+    <symbol id="chevron-down" viewBox="0 0 16 16">
+      <path d="M3.5 5 8 10.5 12.5 5Z" fill="#8f8f8f"/>
+    </symbol>
+
+    <symbol id="folder-open" viewBox="0 0 24 20">
+      <path d="M2 5.5h7l1.8 2H22a1 1 0 0 1 .97 1.24l-1.88 7A1 1 0 0 1 20.12 16H3.5A1.5 1.5 0 0 1 2 14.5Z" fill="#dcb67a"/>
+      <path d="M2 4a2 2 0 0 1 2-2h4.3l1.9 2H14a2 2 0 0 1 2 2v1H2Z" fill="#e3c78a"/>
+      <path d="M2 7h21l-1.9 7.1a1 1 0 0 1-.97.74H3.5A1.5 1.5 0 0 1 2 13.34Z" fill="#f0c674"/>
+    </symbol>
+
+    <symbol id="file-gray" viewBox="0 0 18 20">
+      <path d="M3 1.5h7l5 5v12a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 18.5v-15A2 2 0 0 1 3 1.5Z" fill="#2d2d30" stroke="#8f8f8f" stroke-width="1"/>
+      <path d="M10 1.5v5h5" fill="#3c3c3c"/>
+      <path d="M10 1.5v5h5" fill="none" stroke="#8f8f8f" stroke-width="1"/>
+      <rect x="4.5" y="14.2" width="9" height="2.3" rx="1.15" fill="#8f8f8f"/>
+    </symbol>
+
+    <symbol id="file-blue" viewBox="0 0 18 20">
+      <path d="M3 1.5h7l5 5v12a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 18.5v-15A2 2 0 0 1 3 1.5Z" fill="#2d2d30" stroke="#75beff" stroke-width="1"/>
+      <path d="M10 1.5v5h5" fill="#3c3c3c"/>
+      <path d="M10 1.5v5h5" fill="none" stroke="#75beff" stroke-width="1"/>
+      <rect x="4.5" y="14.2" width="9" height="2.3" rx="1.15" fill="#75beff"/>
+    </symbol>
+
+    <symbol id="file-green" viewBox="0 0 18 20">
+      <path d="M3 1.5h7l5 5v12a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 18.5v-15A2 2 0 0 1 3 1.5Z" fill="#2d2d30" stroke="#89d185" stroke-width="1"/>
+      <path d="M10 1.5v5h5" fill="#3c3c3c"/>
+      <path d="M10 1.5v5h5" fill="none" stroke="#89d185" stroke-width="1"/>
+      <rect x="4.5" y="14.2" width="9" height="2.3" rx="1.15" fill="#89d185"/>
+    </symbol>
+
+    <symbol id="file-orange" viewBox="0 0 18 20">
+      <path d="M3 1.5h7l5 5v12a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 18.5v-15A2 2 0 0 1 3 1.5Z" fill="#2d2d30" stroke="#e4b663" stroke-width="1"/>
+      <path d="M10 1.5v5h5" fill="#3c3c3c"/>
+      <path d="M10 1.5v5h5" fill="none" stroke="#e4b663" stroke-width="1"/>
+      <rect x="4.5" y="14.2" width="9" height="2.3" rx="1.15" fill="#e4b663"/>
+    </symbol>
+
+    <symbol id="file-purple" viewBox="0 0 18 20">
+      <path d="M3 1.5h7l5 5v12a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 18.5v-15A2 2 0 0 1 3 1.5Z" fill="#2d2d30" stroke="#c792ea" stroke-width="1"/>
+      <path d="M10 1.5v5h5" fill="#3c3c3c"/>
+      <path d="M10 1.5v5h5" fill="none" stroke="#c792ea" stroke-width="1"/>
+      <rect x="4.5" y="14.2" width="9" height="2.3" rx="1.15" fill="#c792ea"/>
+    </symbol>
+
+    <symbol id="file-red" viewBox="0 0 18 20">
+      <path d="M3 1.5h7l5 5v12a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 18.5v-15A2 2 0 0 1 3 1.5Z" fill="#2d2d30" stroke="#f48771" stroke-width="1"/>
+      <path d="M10 1.5v5h5" fill="#3c3c3c"/>
+      <path d="M10 1.5v5h5" fill="none" stroke="#f48771" stroke-width="1"/>
+      <rect x="4.5" y="14.2" width="9" height="2.3" rx="1.15" fill="#f48771"/>
+    </symbol>
+  </defs>
+
+  <rect width="1804" height="1810" fill="url(#bg)"/>
+
+  <rect x="78" y="60" width="1648" height="1690" rx="20" fill="url(#pane)" stroke="#2a2a2a" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="78" y="60" width="1648" height="62" rx="20" fill="#252526"/>
+  <circle cx="118" cy="91" r="8.5" fill="#ff5f57"/>
+  <circle cx="147" cy="91" r="8.5" fill="#febc2e"/>
+  <circle cx="176" cy="91" r="8.5" fill="#28c840"/>
+  <text x="902" y="99" class="subheading" text-anchor="middle">folders.svg</text>
+
+  <text x="120" y="168" class="heading">EXPLORER</text>
+  <text x="120" y="206" class="subheading">BLOGASSETS</text>
+
+  <rect x="110" y="228" width="1584" height="1498" rx="12" fill="#1e1e1e" stroke="#2a2a2a" stroke-width="1"/>
+  <rect x="110" y="228" width="1584" height="44" rx="12" fill="#252526"/>
+  <text x="136" y="257" class="subheading">Open folder</text>
+
+  <line x1="194" y1="350" x2="194" y2="438" class="guide"/>
+  <line x1="246" y1="394" x2="246" y2="438" class="guide"/>
+  <line x1="194" y1="482" x2="194" y2="1498" class="guide"/>
+  <line x1="246" y1="526" x2="246" y2="702" class="guide"/>
+  <line x1="246" y1="746" x2="246" y2="1230" class="guide"/>
+  <line x1="298" y1="874" x2="298" y2="966" class="guide"/>
+  <line x1="298" y1="1002" x2="298" y2="1090" class="guide"/>
+  <line x1="246" y1="1450" x2="246" y2="1582" class="guide"/>
+
+  <rect x="122" y="292" width="1560" height="40" rx="8" fill="#2a2d2e"/>
+
+  <use href="#chevron-down" x="138" y="304" width="18" height="18"/>
+  <use href="#folder-open" x="166" y="303" width="26" height="22"/>
+  <text x="206" y="322" class="rowtext">BlogAssets</text>
+
+  <use href="#chevron-down" x="190" y="348" width="18" height="18"/>
+  <use href="#folder-open" x="218" y="347" width="26" height="22"/>
+  <text x="258" y="366" class="rowtext">.github</text>
+
+  <use href="#chevron-down" x="242" y="392" width="18" height="18"/>
+  <use href="#folder-open" x="270" y="391" width="26" height="22"/>
+  <text x="310" y="410" class="rowtext">workflows</text>
+
+  <use href="#file-green" x="322" y="432" width="22" height="24"/>
+  <text x="358" y="453" class="rowtext">dev-containers-part-2.yml</text>
+
+  <use href="#chevron-down" x="190" y="480" width="18" height="18"/>
+  <use href="#folder-open" x="218" y="479" width="26" height="22"/>
+  <text x="258" y="498" class="rowtext">Dev Containers Part 2 Build Your Own Image</text>
+
+  <use href="#chevron-down" x="242" y="524" width="18" height="18"/>
+  <use href="#folder-open" x="270" y="523" width="26" height="22"/>
+  <text x="310" y="542" class="rowtext">.devcontainer</text>
+
+  <use href="#file-blue" x="322" y="564" width="22" height="24"/>
+  <text x="358" y="585" class="rowtext">devcontainer.json</text>
+
+  <use href="#chevron-down" x="242" y="612" width="18" height="18"/>
+  <use href="#folder-open" x="270" y="611" width="26" height="22"/>
+  <text x="310" y="630" class="rowtext">assets</text>
+
+  <use href="#file-orange" x="322" y="652" width="22" height="24"/>
+  <text x="358" y="673" class="rowtext">architecture.png</text>
+
+  <use href="#file-orange" x="322" y="696" width="22" height="24"/>
+  <text x="358" y="717" class="rowtext">folders.png</text>
+
+  <use href="#chevron-down" x="242" y="744" width="18" height="18"/>
+  <use href="#folder-open" x="270" y="743" width="26" height="22"/>
+  <text x="310" y="762" class="rowtext">image</text>
+
+  <use href="#file-gray" x="322" y="784" width="22" height="24"/>
+  <text x="358" y="805" class="rowtext">.dockerignore</text>
+
+  <use href="#file-blue" x="322" y="828" width="22" height="24"/>
+  <text x="358" y="849" class="rowtext">Dockerfile</text>
+
+  <use href="#chevron-down" x="294" y="876" width="18" height="18"/>
+  <use href="#folder-open" x="322" y="875" width="26" height="22"/>
+  <text x="362" y="894" class="rowtext">scripts</text>
+
+  <use href="#file-green" x="374" y="916" width="22" height="24"/>
+  <text x="410" y="937" class="rowtext">download-tools.sh</text>
+
+  <use href="#file-purple" x="374" y="960" width="22" height="24"/>
+  <text x="410" y="981" class="rowtext">install-modules.ps1</text>
+
+  <use href="#chevron-down" x="294" y="1004" width="18" height="18"/>
+  <use href="#folder-open" x="322" y="1003" width="26" height="22"/>
+  <text x="362" y="1022" class="rowtext">tests</text>
+
+  <use href="#file-purple" x="374" y="1044" width="22" height="24"/>
+  <text x="410" y="1065" class="rowtext">Invoke-ImageTest.ps1</text>
+
+  <use href="#file-red" x="374" y="1088" width="22" height="24"/>
+  <text x="410" y="1109" class="rowtext">image.Tests.ps1</text>
+
+  <use href="#chevron-down" x="242" y="1184" width="18" height="18"/>
+  <use href="#folder-open" x="270" y="1183" width="26" height="22"/>
+  <text x="310" y="1202" class="rowtext">infra</text>
+
+  <use href="#file-orange" x="322" y="1224" width="22" height="24"/>
+  <text x="358" y="1245" class="rowtext">.tflint.hcl</text>
+
+  <use href="#file-orange" x="322" y="1268" width="22" height="24"/>
+  <text x="358" y="1289" class="rowtext">main.tf</text>
+
+  <use href="#file-orange" x="322" y="1312" width="22" height="24"/>
+  <text x="358" y="1333" class="rowtext">outputs.tf</text>
+
+  <use href="#file-orange" x="322" y="1356" width="22" height="24"/>
+  <text x="358" y="1377" class="rowtext">variables.tf</text>
+
+  <use href="#file-orange" x="322" y="1400" width="22" height="24"/>
+  <text x="358" y="1421" class="rowtext">versions.tf</text>
+
+  <use href="#chevron-down" x="242" y="1448" width="18" height="18"/>
+  <use href="#folder-open" x="270" y="1447" width="26" height="22"/>
+  <text x="310" y="1466" class="rowtext">scripts</text>
+
+  <use href="#file-purple" x="322" y="1488" width="22" height="24"/>
+  <text x="358" y="1509" class="rowtext">New-GitHubOidcDeploymentIdentity.ps1</text>
+
+  <use href="#file-purple" x="322" y="1532" width="22" height="24"/>
+  <text x="358" y="1553" class="rowtext">Remove-DevContainerRegistryDeployment.ps1</text>
+
+  <use href="#file-purple" x="322" y="1576" width="22" height="24"/>
+  <text x="358" y="1597" class="rowtext">Set-CodespacesRegistrySecret.ps1</text>
+
+  <use href="#file-gray" x="270" y="1620" width="22" height="24"/>
+  <text x="306" y="1641" class="rowtext">.gitattributes</text>
+
+  <use href="#file-blue" x="270" y="1664" width="22" height="24"/>
+  <text x="306" y="1685" class="rowtext">README.md</text>
+
+  <text x="120" y="1738" class="hint">Rebuilt from the current main branch of github.com/constantinhager/BlogAssets.</text>
+</svg>

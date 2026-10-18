@@ -13,6 +13,33 @@
 ';
 
 /* append your custom style below */
+/* Rouge marks valid syntax it can't parse (e.g. PowerShell splatting @params, 2>&1) as .err - don't paint it red.
+   !important: the theme's .err rules are scoped to :root[data-bs-theme] and would win otherwise. */
+.highlight .err {
+  color: inherit !important;
+  background-color: transparent !important;
+}
+
+/* Opt-in wrapping for tables with sentences: add {: .wrap} below the Markdown table */
+.table-wrapper > table.wrap {
+  th,
+  td {
+    white-space: normal;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  td:first-child,
+  td code {
+    white-space: nowrap;
+  }
+}
+
+/* Numbered step tables: add {: .wrap .steps} */
+.table-wrapper > table.steps td:first-child {
+  text-align: center;
+}
+
 /* Custom logo under the sidebar avatar */
 .profile-wrapper {
   display: flex;
